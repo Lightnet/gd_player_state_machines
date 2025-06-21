@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://mvfpjdjmgvyl"]
+
+[ext_resource type="Script" uid="uid://brpdoe05bct2i" path="res://scripts/player/player.gd" id="1_iylwk"]
+[ext_resource type="Script" uid="uid://brjnfuu7keq31" path="res://scripts/state_machines/state_machine.gd" id="2_ev8v4"]
+[ext_resource type="Script" uid="uid://ccx863yttm2ea" path="res://scripts/state_machines/player/idle.gd" id="3_vhck3"]
+[ext_resource type="Script" uid="uid://bir260nvjgs6g" path="res://scripts/state_machines/player/running.gd" id="4_2c4n1"]
+[ext_resource type="Script" uid="uid://b1pal1jm5bjmf" path="res://scripts/state_machines/player/jumping.gd" id="5_oo3uv"]
+[ext_resource type="Script" uid="uid://bn3v1v21sffaw" path="res://scripts/state_machines/player/falling.gd" id="6_30gqm"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r5ocr"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8au0d"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_iylwk")
+speed = 5.0
+jump_impulse = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_r5ocr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_8au0d")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_ev8v4")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_vhck3")
+
+[node name="Running" type="Node" parent="StateMachine"]
+script = ExtResource("4_2c4n1")
+
+[node name="Jumping" type="Node" parent="StateMachine"]
+script = ExtResource("5_oo3uv")
+
+[node name="Falling" type="Node" parent="StateMachine"]
+script = ExtResource("6_30gqm")
