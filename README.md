@@ -43,3 +43,4 @@
 - https://www.sandromaglione.com/articles/how-to-implement-state-machine-pattern-in-godot
 - https://www.youtube.com/watch?v=zcLxBk-Els8 How to make a BASIC FPS CLIMB / VAULT system in Godot 4.2!
 - https://www.youtube.com/watch?v=vapZQ0EuXAs GODOT 4 DYNAMIC MANTLE AND VAULT TUTORIAL
+- https://www.youtube.com/@Brokencircuitboard

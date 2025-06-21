@@ -16,7 +16,10 @@ class_name Player extends CharacterBody3D
 @export var CROUCH_RADIUS_SCALE = 0.5
 @export var is_climbing:bool = false
 
+@onready var draw_3d: Node = $draw3d
+
 var obstacles:Array
+
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -39,12 +42,24 @@ func _physics_process(delta: float) -> void:
 # calculting the place_to_land position and initiating the vault animation.
 func vaulting(delta):
 	if Input.is_action_just_pressed("jump"):
-		var start_hit = raycast(camera.transform.origin, camera.to_global(Vector3(0,0,-1)))
+		# need to fixed error since detect move when not looking at the area
+		#var from  = camera.transform.origin
+		var from  = camera.global_position
+		var to = camera.to_global(Vector3(0,0,-1))
+		draw_3d.line(from, to)
+		print("from:", from, " to:", to)
+		var start_hit = raycast(from, to)
+		print("start_hit: ", start_hit)
 		if start_hit and obstacles.is_empty():
 			#RayCast to detect the prefect place to land(Not that speical, I just excaggerate :D)
-			var place_to_land = raycast(\
-				start_hit.position + self.to_global(Vector3.FORWARD) * collision_shape.shape.radius + (Vector3.UP * collision_shape.shape.height), \
-				Vector3.DOWN * (collision_shape.shape.height))
+			from = start_hit.position + self.to_global(Vector3.FORWARD) * collision_shape.shape.radius + (Vector3.UP * collision_shape.shape.height)
+			to = Vector3.DOWN * (collision_shape.shape.height)
+			#ref debug draw
+			draw_3d.line(from, to, Color.RED)
+			var place_to_land = raycast(from, to)
+			#var place_to_land = raycast(\
+				#start_hit.position + self.to_global(Vector3.FORWARD) * collision_shape.shape.radius + (Vector3.UP * collision_shape.shape.height), \
+				#Vector3.DOWN * (collision_shape.shape.height))
 			if place_to_land:
 				vault_animation(place_to_land)
 	pass
@@ -62,11 +77,13 @@ func _on_obstacle_detector_top_body_entered(body: Node3D) -> void:
 	if body != self:
 		obstacles.append(body)
 	#pass
+	
 # obstacles for top
 func _on_obstacle_detector_top_body_exited(body: Node3D) -> void:
 	if body != self:
 		obstacles.remove_at(obstacles.find(body))
 	#pass
+	
 # animation for vulting / climbing
 func vault_animation(place_to_land):
 	# player is climbing
@@ -74,7 +91,8 @@ func vault_animation(place_to_land):
 	
 	# first tween animation will make the player move up
 	var vertical_climb = Vector3(global_transform.origin.x, place_to_land.position.y, global_transform.origin.z)
-	print("vertical_climb: ", vertical_climb)
+	#print("vertical_climb: ", vertical_climb)
+	# player set ground with different in player capsule( center orign ) height by half.
 	vertical_climb.y = vertical_climb.y + (collision_shape.shape.height / 2)
 	var vertical_tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN)
 	vertical_tween.tween_property(self, "global_transform:origin", vertical_climb, 0.4)
