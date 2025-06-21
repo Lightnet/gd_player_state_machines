@@ -20,8 +20,8 @@ func physics_update(delta: float) -> void:
 	print("direction: ",direction)
 	
 	if direction:
-		player.velocity.x = (direction.x * player.speed)
-		player.velocity.z = (direction.z * player.speed)
+		player.velocity.x = (direction.x * player.WALK_SPEED)
+		player.velocity.z = (direction.z * player.WALK_SPEED)
 	if direction.length() == 0:
 			player.velocity = Vector3.ZERO
 	

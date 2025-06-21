@@ -2,13 +2,13 @@ extends PlayerState
 
 func enter(previous_state_path: String, data := {}) -> void:
 	#player.animation_player.play("fall")
-	player.velocity.y = player.jump_impulse
+	player.velocity.y = player.JUMP_VELOCITY
 	#player.velocity.y = 10
 	#pass
 
 func physics_update(delta: float) -> void:
 	var input_direction_x := Input.get_axis("left", "right")
-	#player.velocity.x = player.speed * input_direction_x
+	#player.velocity.x = player.WALK_SPEED * input_direction_x
 	var input_dir = Input.get_vector("left","right","forward","backward",-1.0)
 	print("input_dir: ",input_dir)
 	
@@ -16,10 +16,12 @@ func physics_update(delta: float) -> void:
 	print("direction: ",direction)
 	
 	if direction:
-		player.velocity.x = (direction.x * player.speed)
-		player.velocity.z = (direction.z * player.speed)
+		player.velocity.x = (direction.x * player.WALK_SPEED)
+		player.velocity.z = (direction.z * player.WALK_SPEED)
 	
-	player.velocity.y += player.gravity * delta
+	#player.velocity.y += player.GRAVITY * delta
+	#player.velocity.y += (player.GRAVITY * player.get_gravity().y) * delta
+	player.velocity.y += (player.get_gravity().y * player.GRAVITY_FALL) * delta
 	player.move_and_slide()
 
 	if player.is_on_floor():
