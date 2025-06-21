@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://mvfpjdjmgvyl"]
+[gd_scene load_steps=10 format=3 uid="uid://mvfpjdjmgvyl"]
 
 [ext_resource type="Script" uid="uid://brpdoe05bct2i" path="res://scripts/player/player.gd" id="1_iylwk"]
 [ext_resource type="Script" uid="uid://brjnfuu7keq31" path="res://scripts/state_machines/state_machine.gd" id="2_ev8v4"]
@@ -10,6 +10,9 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r5ocr"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8au0d"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_iylwk"]
+radius = 0.3
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_iylwk")
@@ -40,3 +43,13 @@ script = ExtResource("5_oo3uv")
 
 [node name="Falling" type="Node" parent="StateMachine"]
 script = ExtResource("6_30gqm")
+
+[node name="obstacle_detector_top" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="obstacle_detector_top"]
+editor_description = "Detect to prevent clipping."
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.01013, 0)
+shape = SubResource("CylinderShape3D_iylwk")
+
+[connection signal="body_entered" from="obstacle_detector_top" to="." method="_on_obstacle_detector_top_body_entered"]
+[connection signal="body_exited" from="obstacle_detector_top" to="." method="_on_obstacle_detector_top_body_exited"]

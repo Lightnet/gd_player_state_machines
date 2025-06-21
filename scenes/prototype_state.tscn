@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bnkmiak55l2fn"]
+[gd_scene load_steps=16 format=3 uid="uid://bnkmiak55l2fn"]
 
 [ext_resource type="Texture2D" uid="uid://dihkml6628xmu" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_1crot"]
 [ext_resource type="PackedScene" uid="uid://mvfpjdjmgvyl" path="res://prefabs/player/player.tscn" id="1_r5ocr"]
 [ext_resource type="Script" uid="uid://4rgcsyaqbjfm" path="res://scripts/ui_player_state.gd" id="3_8au0d"]
+[ext_resource type="Texture2D" uid="uid://bm40xph16eexn" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="4_jvrg6"]
+[ext_resource type="Script" uid="uid://b4dxjfku8hkmx" path="res://scripts/reticle.gd" id="4_l47rc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jvrg6"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -19,6 +21,26 @@ tonemap_mode = 2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jvrg6"]
 albedo_texture = ExtResource("1_1crot")
 uv1_triplanar = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l47rc"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bqab6"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2hmv8"]
+albedo_texture = ExtResource("4_jvrg6")
+uv1_triplanar = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jvrg6"]
+size = Vector3(2.01, 0.1, 2.01)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l47rc"]
+albedo_color = Color(0.71234, 0.381251, 0.156858, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2hmv8"]
+material = SubResource("StandardMaterial3D_l47rc")
+size = Vector3(2.01, 0.1, 2.01)
 
 [node name="PrototypeState" type="Node3D"]
 
@@ -66,3 +88,53 @@ text = " State: "
 [node name="PlayerState" type="Label" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = " None "
+
+[node name="reticle" type="CenterContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -0.5
+offset_right = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_l47rc")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+offset_left = 773.0
+offset_top = 13.0
+offset_right = 1134.0
+offset_bottom = 338.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+size = Vector2i(361, 325)
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+transform = Transform3D(-0.11934, 0, 0.992853, 0, 1, 0, -0.992853, 0, -0.11934, 4.03532, 2.7945, -3.31459)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -3)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_l47rc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_bqab6")
+surface_material_override/0 = SubResource("StandardMaterial3D_2hmv8")
+
+[node name="Area3D" type="Area3D" parent="StaticBody3D"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.94883, 0)
+shape = SubResource("BoxShape3D_jvrg6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.938303, 0)
+mesh = SubResource("BoxMesh_2hmv8")
