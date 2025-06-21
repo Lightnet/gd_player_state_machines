@@ -35,6 +35,7 @@
 
 - UI debug
 	- player state
+	- draw line
 
 # Credits:
 - https://www.gdquest.com/tutorial/godot/design-patterns/finite-state-machine/
@@ -44,3 +45,4 @@
 - https://www.youtube.com/watch?v=zcLxBk-Els8 How to make a BASIC FPS CLIMB / VAULT system in Godot 4.2!
 - https://www.youtube.com/watch?v=vapZQ0EuXAs GODOT 4 DYNAMIC MANTLE AND VAULT TUTORIAL
 - https://www.youtube.com/@Brokencircuitboard
+- https://www.youtube.com/watch?v=JnrhURF1jgM How To Draw Lines and Points in 3D - Godot 4 Tutorial
