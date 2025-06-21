@@ -37,7 +37,7 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	vaulting(delta)
-	pass
+	#pass
 
 # calculting the place_to_land position and initiating the vault animation.
 func vaulting(delta):
@@ -47,13 +47,23 @@ func vaulting(delta):
 		var from  = camera.global_position
 		var to = camera.to_global(Vector3(0,0,-1))
 		draw_3d.line(from, to)
-		print("from:", from, " to:", to)
+		#print("from:", from, " to:", to)
 		var start_hit = raycast(from, to)
-		print("start_hit: ", start_hit)
+		#print("start_hit: ", start_hit)
 		if start_hit and obstacles.is_empty():
+			
+			draw_3d.point(start_hit.position, 0.1, Color.RED)
+			
 			#RayCast to detect the prefect place to land(Not that speical, I just excaggerate :D)
-			from = start_hit.position + self.to_global(Vector3.FORWARD) * collision_shape.shape.radius + (Vector3.UP * collision_shape.shape.height)
-			to = Vector3.DOWN * (collision_shape.shape.height)
+			#from = start_hit.position + self.to_global(Vector3.FORWARD) * collision_shape.shape.radius + (Vector3.UP * collision_shape.shape.height)
+			#var forward = -(camera.transform.basis.z.normalized())#nope
+			var forward = (transform.basis.z.normalized()) * -1 #correct forward from player root
+			#print("forward:", forward)
+			
+			from = start_hit.position + (forward * collision_shape.shape.radius) + (Vector3.UP * collision_shape.shape.height)
+			
+			#to = Vector3.DOWN * (collision_shape.shape.height)
+			to = start_hit.position + (Vector3.DOWN * (collision_shape.shape.height))
 			#ref debug draw
 			draw_3d.line(from, to, Color.RED)
 			var place_to_land = raycast(from, to)
@@ -62,7 +72,7 @@ func vaulting(delta):
 				#Vector3.DOWN * (collision_shape.shape.height))
 			if place_to_land:
 				vault_animation(place_to_land)
-	pass
+	#pass
 
 # create raycast from vis code
 func raycast(from:Vector3, to:Vector3):
