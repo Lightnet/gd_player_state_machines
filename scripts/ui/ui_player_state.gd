@@ -7,6 +7,6 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
-	UIPlayerState.text = player.get_node("StateMachine").state.name
+	#UIPlayerState.text = player.get_node("StateMachine").state.name
 	
 	pass

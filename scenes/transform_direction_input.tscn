@@ -1,0 +1,89 @@
+[gd_scene load_steps=15 format=3 uid="uid://c561rwib7q8by"]
+
+[ext_resource type="Script" uid="uid://cbks67txom5dl" path="res://scripts/tests/mesh_3d_input.gd" id="1_ywafd"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ol51l"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_3kx0b"]
+sky_material = SubResource("ProceduralSkyMaterial_ol51l")
+
+[sub_resource type="Environment" id="Environment_4xgwb"]
+background_mode = 2
+sky = SubResource("Sky_3kx0b")
+tonemap_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_ol51l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3kx0b"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xgwb"]
+albedo_color = Color(1, 0.5023, 0.43551, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_udfgo"]
+albedo_color = Color(0.129492, 0.365382, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_uqw2x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ijpg"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ywafd"]
+albedo_color = Color(0, 0.264767, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iq3fb"]
+albedo_color = Color(3.27289e-06, 0.730016, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3kx0b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uqw2x"]
+albedo_color = Color(0.147672, 0.147672, 0.147672, 1)
+
+[node name="ForwardInput" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4xgwb")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.596603, 0.802536, 0, -0.802536, 0.596603, 0, 3.60954, 2.62989)
+
+[node name="red_neg" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.509, 0, 0)
+mesh = SubResource("BoxMesh_ol51l")
+surface_material_override/0 = SubResource("StandardMaterial3D_3kx0b")
+
+[node name="red_pos" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.942, 0, 0)
+mesh = SubResource("BoxMesh_ol51l")
+surface_material_override/0 = SubResource("StandardMaterial3D_4xgwb")
+
+[node name="blue_pos" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.767)
+mesh = SubResource("BoxMesh_ol51l")
+surface_material_override/0 = SubResource("StandardMaterial3D_udfgo")
+
+[node name="blue_neg" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.034)
+mesh = SubResource("BoxMesh_uqw2x")
+surface_material_override/0 = SubResource("StandardMaterial3D_4ijpg")
+
+[node name="green_neg" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.38488, 0)
+mesh = SubResource("BoxMesh_uqw2x")
+surface_material_override/0 = SubResource("StandardMaterial3D_ywafd")
+
+[node name="green_pos" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84333, 0)
+mesh = SubResource("BoxMesh_uqw2x")
+surface_material_override/0 = SubResource("StandardMaterial3D_iq3fb")
+
+[node name="player" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_3kx0b")
+surface_material_override/0 = SubResource("StandardMaterial3D_uqw2x")
+script = ExtResource("1_ywafd")

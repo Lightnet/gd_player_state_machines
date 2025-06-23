@@ -13,14 +13,14 @@ albedo_texture = ExtResource("1_jf8sf")
 uv1_triplanar = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bqab6"]
-size = Vector3(2.01, 0.1, 2.01)
+size = Vector3(2.01, 0.2, 2.01)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l47rc"]
 albedo_color = Color(0.71234, 0.381251, 0.156858, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_2hmv8"]
 material = SubResource("StandardMaterial3D_l47rc")
-size = Vector3(2.01, 0.1, 2.01)
+size = Vector3(2.01, 0.2, 2.01)
 
 [node name="block_climb" type="StaticBody3D"]
 
@@ -36,9 +36,9 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.937101, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.894746, 0)
 shape = SubResource("BoxShape3D_bqab6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.938303, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89485, 0)
 mesh = SubResource("BoxMesh_2hmv8")

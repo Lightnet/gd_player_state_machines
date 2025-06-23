@@ -15,7 +15,7 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_iylwk"]
 radius = 0.3
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
 script = ExtResource("1_iylwk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -53,7 +53,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.01013, 0)
 shape = SubResource("CylinderShape3D_iylwk")
 
 [node name="draw3d" type="Node" parent="."]
+editor_description = "Debug Draw 3D"
 script = ExtResource("7_ev8v4")
+
+[node name="tool" type="Node3D" parent="."]
 
 [connection signal="body_entered" from="obstacle_detector_top" to="." method="_on_obstacle_detector_top_body_entered"]
 [connection signal="body_exited" from="obstacle_detector_top" to="." method="_on_obstacle_detector_top_body_exited"]

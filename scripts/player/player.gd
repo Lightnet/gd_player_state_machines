@@ -23,7 +23,19 @@ var obstacles:Array
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
+	Console.add_command("hello", console_hello)
+	
+	Console.add_command("fly", console_fly)
+	Console.add_command("ghost", console_ghost)
+	Console.add_command("walk", console_walk)
+	Console.add_command("god", console_god)
+	#Console.add_command("summon", console_summon)
+	#Console.add_command("addbots", console_addbots)
+	#print("FORWARD: ", Vector3.FORWARD)
+	
+func _exit_tree() -> void:
+	Console.remove_command("hello")
+	
 func _input(event: InputEvent) -> void:
 	# camera handle for all state.
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
@@ -57,9 +69,13 @@ func vaulting(delta):
 			#RayCast to detect the prefect place to land(Not that speical, I just excaggerate :D)
 			#from = start_hit.position + self.to_global(Vector3.FORWARD) * collision_shape.shape.radius + (Vector3.UP * collision_shape.shape.height)
 			#var forward = -(camera.transform.basis.z.normalized())#nope
+			
+			# local
 			var forward = (transform.basis.z.normalized()) * -1 #correct forward from player root
 			#print("forward:", forward)
 			
+			# start from top to point to ground
+			# current ray cast poition + (player forward direction * player shape radius) + (Up * player shape height)
 			from = start_hit.position + (forward * collision_shape.shape.radius) + (Vector3.UP * collision_shape.shape.height)
 			
 			#to = Vector3.DOWN * (collision_shape.shape.height)
@@ -122,3 +138,26 @@ func vault_animation(place_to_land):
 	is_climbing = false
 	#pass
 #
+
+## dev access
+func console_hello():
+	Console.print_line("Hello There")
+	print("Hello")
+
+func console_fly():
+	pass
+
+func console_ghost():
+	pass
+	
+func console_walk():
+	pass
+	
+func console_god():
+	pass
+
+#func console_summon():
+	#pass
+	
+#func console_addbots():
+	#pass
