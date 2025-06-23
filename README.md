@@ -101,8 +101,8 @@ The system will support vehicle interactions, including:
 	- [x] fall
 	- [x] crouch
 	- [x] slide (simple test)
-	- [ ] prone
-	- [x] ghost
+	- [x] prone (simple test)
+	- [x] ghost (disable collision)
 	- [x] fly
 	- [ ] ladder
 	- [ ] climb over
