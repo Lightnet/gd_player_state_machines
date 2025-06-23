@@ -8,13 +8,88 @@
 
 # Information:
 	
-  This is sample project for state machines to test basic movement and interact for player controls. There are different way to handle state machines depend on the game play and controls. It is base on GDQuest creator tutorial but out date some degree for missing or remove api for Godot 4.4.1 changes. Which had to adapt to change.
+  This is sample project for state machines for player input controls. This is prototype test.
 
-  The reason for state machines is check for condition for input from user controls and state. One is example is prone pose while jump which should not be doing. The prone position can only move slowly but can't jump. It need to be out the pose stance. By Crouch or stand to jump. Another is ladder state to prevent gravity fall.
+# Overview:
 
-  Another point is later use AI logic state.
+This project implements a finite state machine (FSM) to manage player movement and interactions in a 2D/3D game developed in Godot 4.4.1. The state machine handles user input, enforces gameplay rules, and ensures logical transitions between player states (e.g., standing, crouching, prone, jumping, ladder climbing). The system is adapted from an older GDQuest tutorial, updated to accommodate API changes and deprecated features in Godot 4.4.1.
 
-  Testing vehicle interact.
+The state machine is designed to:
+- Process user input and transition between states based on gameplay conditions.
+- Prevent invalid actions, such as jumping while in a prone position.
+- Support extensibility for future features, including AI logic and vehicle interactions.
+
+# Purpose:
+The state machine ensures robust and predictable player behavior by:
+1. Managing mutually exclusive states (e.g., prone and jumping cannot occur simultaneously).
+2. Enforcing gameplay constraints (e.g., slow movement in prone, no gravity during ladder climbing).
+3. Providing a foundation for future AI-driven state logic and vehicle interaction systems.
+
+# State Machine Design
+
+## Core States
+
+The system defines the following player states:
+- Standing: Default state for normal movement (walking, running).
+- Crouching: Reduced height, slower movement, allows transition to jumping.
+- Prone: Low profile, very slow movement, prevents jumping until transitioning to crouching or standing.
+- Jumping: Vertical movement, only accessible from standing or crouching states.
+- Ladder Climbing: Disables gravity, allows vertical movement on ladders, prevents falling.
+
+## State Transition Rules
+- Prone Restrictions: Players cannot jump while prone. They must transition to crouching or standing first.
+- Ladder State: Disables gravity to prevent falling and restricts horizontal movement.
+- Input-Driven Transitions: States change based on user input (e.g., pressing "jump" from standing/crouching, or "prone" from crouching).
+
+## Input Handling
+The state machine processes input events using Godot’s updated input system (Input class in Godot 4.4.1). Each state checks for valid inputs and transitions accordingly. For example:
+
+- ui_up or ui_down triggers ladder climbing when near a ladder.
+- ui_jump initiates a jump only from valid states (standing, crouching).
+- ui_crouch or ui_prone adjusts the player’s stance.
+
+# Implementation Notes
+
+## Godot 4.4.1 Adaptations
+The original GDQuest tutorial relied on older Godot APIs, which have been deprecated or modified in Godot 4.4.1. Key adaptations include:
+
+- Updated input handling to use Input.get_action_strength() and Input.is_action_just_pressed() for smoother control.
+- Replaced deprecated node properties (e.g., Transform updates) with current equivalents.
+- Adjusted physics interactions to use CharacterBody2D/CharacterBody3D for movement and collision.
+
+### Code Structure
+- State Machine Node: A dedicated node (StateMachine) manages state transitions and delegates input handling to the active state.
+- State Scripts: EachWheel state (e.g., StandingState, ProneState) is implemented as a separate script, inheriting from a base State class.
+- Player Node: The player (CharacterBody2D or CharacterBody3D) references the state machine and applies movement logic based on the current state.
+
+### Gameplay Constraints
+- Prone State: Movement speed is significantly reduced, and jumping is disabled until the player transitions out of prone (via crouching or standing).
+- Ladder State: Gravity is disabled to allow smooth climbing. Horizontal movement is restricted to prevent unintended behavior.
+- Jumping: Only available from standing or crouching states to maintain logical gameplay flow.
+
+# Future Features
+
+## AI Logic Integration
+The state machine is designed to be extensible for AI-controlled characters. Planned enhancements include:
+- AI State Transitions: AI-driven decisions (e.g., patrol, chase, idle) using similar state logic.
+- Behavior Trees: Integration with Godot’s node-based systems to complement the state machine for complex AI behaviors.
+
+## Vehicle Interaction Testing
+The system will support vehicle interactions, including:
+- Enter/Exit States: New states for entering, driving, and exiting vehicles.
+- Vehicle-Specific Controls: Custom input mappings for vehicle movement and interactions.
+- State Transitions: Seamless transitions between on-foot and vehicle states, ensuring no invalid actions (e.g., jumping while driving).
+
+# Testing and Validation
+- Unit Tests: Test state transitions to ensure invalid states (e.g., prone + jump) are blocked.
+- Input Validation: Verify that inputs correctly trigger state changes (e.g., ladder climbing only near ladders).
+- Physics Checks: Confirm gravity is disabled during ladder climbing and re-enabled on exit.
+- Vehicle Interaction Prototypes: Initial tests for vehicle entry/exit and control handling.
+
+# Known Issues and Limitations
+- Some edge cases in state transitions (e.g., rapid input spamming) may require additional debouncing logic.
+- Vehicle interaction is in early prototyping and not fully integrated.
+- AI logic is planned but not yet implemented.
 
 # Features:
 - state machine
@@ -59,9 +134,7 @@
 	- [ ] summon item name
 	- [ ] addbots N/A
 	- [ ] killbots N/A
-- 
-
-
+- ...
 
 # Credits:
 - https://www.gdquest.com/tutorial/godot/design-patterns/finite-state-machine/
@@ -84,5 +157,5 @@
 - console
 	- Developer Console
 	- Author: jitspoe
-- 
+- ...
 	
