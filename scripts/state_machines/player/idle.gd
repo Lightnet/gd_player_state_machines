@@ -1,13 +1,14 @@
 extends PlayerState
+# IDLE
 
-func enter(previous_state_path: String, data := {}) -> void:
+#func enter(previous_state_path: String, data := {}) -> void:
 	#player.velocity.x = 0.0
 	#player.velocity.y = 0.0
 	#player.velocity.z = 0.0
 	#player.animation_player.play("idle")
-	pass
+	#pass
 
-func handle_input(event: InputEvent) -> void:
+#func handle_input(event: InputEvent) -> void:
 	#print("event:", event)
 	#if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		#if event is InputEventMouseMotion:
@@ -20,9 +21,9 @@ func handle_input(event: InputEvent) -> void:
 		#finished.emit(RUNNING)
 	#elif Input.is_action_pressed("jump"):
 		#finished.emit(JUMPING)
-	pass
+	#pass
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	#print("idle: ", player.is_on_floor())
 	#if !player.is_on_floor():
 		#player.velocity.y += (player.GRAVITY * -1) * _delta
@@ -34,10 +35,10 @@ func physics_update(delta: float) -> void:
 
 	if not player.is_on_floor():
 		finished.emit(FALLING)
-	elif Input.is_action_just_pressed("forward") or Input.is_action_just_pressed("backward"):
-		finished.emit(RUNNING)
-	elif Input.is_action_pressed("left") or Input.is_action_pressed("right"):
-		finished.emit(RUNNING)
+	elif Input.is_action_just_pressed("forward") or Input.is_action_just_pressed("backward") or Input.is_action_pressed("left") or Input.is_action_pressed("right"):
+		finished.emit(WALKING)
+	elif Input.is_action_just_pressed("crouch"):
+		finished.emit(CROUCHING)
 	elif Input.is_action_pressed("jump"):
 		finished.emit(JUMPING)
 	elif player.velocity.length() > 0:

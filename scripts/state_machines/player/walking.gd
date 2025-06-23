@@ -6,9 +6,9 @@ extends PlayerState
 
 func handle_input(event: InputEvent) -> void:
 	#print("forward run")
-	if event.is_action_released("sprint"):
-		print("input walk")
-		finished.emit(WALKING)
+	if event.is_action_pressed("sprint"):
+		print("input sprint")
+		finished.emit(RUNNING)
 	#pass
 
 func physics_update(_delta: float) -> void:
@@ -21,10 +21,11 @@ func physics_update(_delta: float) -> void:
 	#print("direction: ",direction)
 	
 	if direction:
-		player.velocity.x = (direction.x * player.SPRINT_SPEED)
-		player.velocity.z = (direction.z * player.SPRINT_SPEED)
+		player.velocity.x = (direction.x * player.WALK_SPEED)
+		player.velocity.z = (direction.z * player.WALK_SPEED)
 	if direction.length() == 0:
 			player.velocity = Vector3.ZERO
+	
 	
 	#var input_direction_x := Input.get_axis("left", "right")
 	#var input_direction_y := Input.get_axis("forward", "backward")

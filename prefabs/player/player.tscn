@@ -1,12 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://mvfpjdjmgvyl"]
+[gd_scene load_steps=15 format=3 uid="uid://mvfpjdjmgvyl"]
 
 [ext_resource type="Script" uid="uid://brpdoe05bct2i" path="res://scripts/player/player.gd" id="1_iylwk"]
 [ext_resource type="Script" uid="uid://brjnfuu7keq31" path="res://scripts/state_machines/state_machine.gd" id="2_ev8v4"]
 [ext_resource type="Script" uid="uid://ccx863yttm2ea" path="res://scripts/state_machines/player/idle.gd" id="3_vhck3"]
 [ext_resource type="Script" uid="uid://bir260nvjgs6g" path="res://scripts/state_machines/player/running.gd" id="4_2c4n1"]
 [ext_resource type="Script" uid="uid://b1pal1jm5bjmf" path="res://scripts/state_machines/player/jumping.gd" id="5_oo3uv"]
+[ext_resource type="Script" uid="uid://cynfh77xxrhl1" path="res://scripts/state_machines/player/walking.gd" id="5_vhck3"]
 [ext_resource type="Script" uid="uid://bn3v1v21sffaw" path="res://scripts/state_machines/player/falling.gd" id="6_30gqm"]
 [ext_resource type="Script" uid="uid://cdnfl0wocyrip" path="res://scripts/debug/draw3d.gd" id="7_ev8v4"]
+[ext_resource type="Script" uid="uid://ct4oprc3uoono" path="res://scripts/state_machines/player/ghost.gd" id="8_oo3uv"]
+[ext_resource type="Script" uid="uid://boyovyq0hxu5c" path="res://scripts/state_machines/player/flying.gd" id="9_30gqm"]
+[ext_resource type="Script" uid="uid://dvh68qnllrbj0" path="res://scripts/state_machines/player/crouching.gd" id="10_30gqm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r5ocr"]
 
@@ -15,8 +19,9 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_iylwk"]
 radius = 0.3
 
-[node name="Player" type="CharacterBody3D" groups=["Player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("statemachine") groups=["Player"]]
 script = ExtResource("1_iylwk")
+statemachine = NodePath("StateMachine")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_r5ocr")
@@ -39,11 +44,23 @@ script = ExtResource("3_vhck3")
 [node name="Running" type="Node" parent="StateMachine"]
 script = ExtResource("4_2c4n1")
 
+[node name="Walking" type="Node" parent="StateMachine"]
+script = ExtResource("5_vhck3")
+
 [node name="Jumping" type="Node" parent="StateMachine"]
 script = ExtResource("5_oo3uv")
 
 [node name="Falling" type="Node" parent="StateMachine"]
 script = ExtResource("6_30gqm")
+
+[node name="Ghost" type="Node" parent="StateMachine"]
+script = ExtResource("8_oo3uv")
+
+[node name="Flying" type="Node" parent="StateMachine"]
+script = ExtResource("9_30gqm")
+
+[node name="Crouching" type="Node" parent="StateMachine"]
+script = ExtResource("10_30gqm")
 
 [node name="obstacle_detector_top" type="Area3D" parent="."]
 

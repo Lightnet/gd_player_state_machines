@@ -1,6 +1,7 @@
 class_name Player extends CharacterBody3D
 
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
+@onready var mesh_instance: MeshInstance3D = $MeshInstance3D
 @onready var neck: Node3D = $Neck
 @onready var camera: Camera3D = $Neck/Camera3D
 
@@ -11,28 +12,50 @@ class_name Player extends CharacterBody3D
 @export var GRAVITY := 9.8
 @export var GRAVITY_FALL := 0.9
 @export var AIR_CONTROL_SPEED := 5.0
-@export var IS_CONTROLLER: = true #handle when the menu N/A
+@export var IS_CONTROLLER: = true # handle when the menu N/A
 @export var CROUCH_HEIGHT_SCALE = 0.5
 @export var CROUCH_RADIUS_SCALE = 0.5
+@export var CROUCH_SPEED = 2.5 
 @export var is_climbing:bool = false
 
+# Stored original properties
+var original_shape_height: float
+var original_shape_radius: float
+var original_mesh_position: Vector3
+var original_neck_position: Vector3
+var original_position_y: float
+
 @onready var draw_3d: Node = $draw3d
+@export var statemachine:Node
 
 var obstacles:Array
-
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	Console.add_command("hello", console_hello)
-	
 	Console.add_command("fly", console_fly)
 	Console.add_command("ghost", console_ghost)
 	Console.add_command("walk", console_walk)
 	Console.add_command("god", console_god)
-	#Console.add_command("summon", console_summon)
-	#Console.add_command("addbots", console_addbots)
 	#print("FORWARD: ", Vector3.FORWARD)
-	
+	store_data()
+
+func store_data():
+	if collision_shape and collision_shape.shape is CapsuleShape3D:
+		original_shape_height = collision_shape.shape.height
+		original_shape_radius = collision_shape.shape.radius
+		print("Original height:", original_shape_height, "Original radius:", original_shape_radius)
+	else:
+		push_error("CollisionShape3D must have a CapsuleShape3D assigned.")
+	if mesh_instance:
+		original_mesh_position = mesh_instance.position
+	else:
+		push_error("MeshInstance3D not found.")
+	if neck:
+		original_neck_position = neck.position
+	original_position_y = position.y
+	#pass
+
 func _exit_tree() -> void:
 	Console.remove_command("hello")
 	
@@ -52,7 +75,7 @@ func _physics_process(delta: float) -> void:
 	#pass
 
 # calculting the place_to_land position and initiating the vault animation.
-func vaulting(delta):
+func vaulting(_delta):
 	if Input.is_action_just_pressed("jump"):
 		# need to fixed error since detect move when not looking at the area
 		#var from  = camera.transform.origin
@@ -145,19 +168,22 @@ func console_hello():
 	print("Hello")
 
 func console_fly():
-	pass
+	var state = statemachine.state
+	state.finished.emit((state.FLYING))
+	Console.print_line("FLY MODE")
+	#pass
 
 func console_ghost():
-	pass
+	var state = statemachine.state
+	state.finished.emit((state.GHOST))
+	Console.print_line("GHOST MODE")
+	#pass
 	
 func console_walk():
-	pass
+	var state = statemachine.state
+	state.finished.emit((state.IDLE))
+	Console.print_line("NORMAL MODE")
+	#pass
 	
 func console_god():
 	pass
-
-#func console_summon():
-	#pass
-	
-#func console_addbots():
-	#pass

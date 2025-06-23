@@ -1,9 +1,19 @@
 class_name PlayerState extends State
 
-const IDLE = "Idle"
+const IDLE = "Idle" # node name
 const RUNNING = "Running"
+const WALKING = "Walking" 
 const JUMPING = "Jumping"
 const FALLING = "Falling"
+const DEATH = "Death"
+const CROUCHING = "Crouching"
+const PRONE = "Prone"
+const FLYING = "Flying"
+const GHOST = "Ghost"
+
+var toggle_croucn:bool = true
+var toggle_prone:bool = true
+var toggle_sprint:bool = true
 
 var player: Player
 
