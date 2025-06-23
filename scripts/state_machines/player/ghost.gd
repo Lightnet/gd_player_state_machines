@@ -7,9 +7,8 @@ func enter(_previous_state_path: String, _data := {}) -> void:
 func exit() -> void:
 	player.collision_shape.disabled = false
 
-func handle_input(event: InputEvent) -> void:
-	
-	pass
+#func handle_input(event: InputEvent) -> void:
+	#pass
 
 func physics_update(_delta: float) -> void:
 	var input_dir = Input.get_vector("left","right","forward","backward",-1.0)
@@ -22,7 +21,6 @@ func physics_update(_delta: float) -> void:
 		player.velocity.x = (direction.x * player.WALK_SPEED)
 		player.velocity.z = (direction.z * player.WALK_SPEED)
 	
-		
 	if direction.length() == 0:
 			player.velocity = Vector3.ZERO
 			
@@ -32,6 +30,5 @@ func physics_update(_delta: float) -> void:
 	if Input.is_action_pressed("down"):
 		player.velocity.y = (1 * player.WALK_SPEED) * -1
 	
-			
 	player.move_and_slide()
-	pass
+	#pass

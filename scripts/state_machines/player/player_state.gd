@@ -10,7 +10,8 @@ const CROUCHING = "Crouching"
 const PRONE = "Prone"
 const FLYING = "Flying"
 const GHOST = "Ghost"
-
+const SLIDING = "Sliding"
+ 
 var toggle_croucn:bool = true
 var toggle_prone:bool = true
 var toggle_sprint:bool = true

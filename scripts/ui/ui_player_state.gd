@@ -6,6 +6,7 @@ extends Control
 #func _ready() -> void:
 	#pass
 
-#func _process(delta: float) -> void:
-	#UIPlayerState.text = player.get_node("StateMachine").state.name
+func _process(delta: float) -> void:
+	if UIPlayerState and player:
+		UIPlayerState.text = player.get_node("StateMachine").state.name
 	#pass

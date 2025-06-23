@@ -14,7 +14,7 @@ class_name Player extends CharacterBody3D
 @export var AIR_CONTROL_SPEED := 5.0
 @export var IS_CONTROLLER: = true # handle when the menu N/A
 @export var CROUCH_HEIGHT_SCALE = 0.5
-@export var CROUCH_RADIUS_SCALE = 0.5
+@export var CROUCH_RADIUS_SCALE = 0.8
 @export var CROUCH_SPEED = 2.5 
 @export var is_climbing:bool = false
 

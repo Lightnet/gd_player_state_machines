@@ -54,6 +54,8 @@ func physics_update(_delta: float) -> void:
 		finished.emit(FALLING)
 	elif Input.is_action_pressed("jump"):
 		finished.emit(JUMPING)
+	elif Input.is_action_pressed("crouch"):
+		finished.emit(SLIDING)
 	elif is_equal_approx(input_dir.x, 0.0) and is_equal_approx(input_dir.y, 0.0):
 		#print("RUN > IDLE")
 		finished.emit(IDLE)

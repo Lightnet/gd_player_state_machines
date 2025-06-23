@@ -99,11 +99,11 @@ The system will support vehicle interactions, including:
 	- [x] jump
 	- [x] edge climb with area 3d (wip)
 	- [x] fall
-	- [ ] crouch
-	- [ ] slide
+	- [x] crouch
+	- [x] slide (simple test)
 	- [ ] prone
-	- [x] ghost (wip)
-	- [x] fly (wip)
+	- [x] ghost
+	- [x] fly
 	- [ ] ladder
 	- [ ] climb over
 	- [ ] death
@@ -135,6 +135,41 @@ The system will support vehicle interactions, including:
 	- [ ] addbots N/A
 	- [ ] killbots N/A
 - ...
+
+# State machines:
+There are three files base to handle state machine. One file handle player with character3d. Two file handle the class state and state machine change state.
+
+The player class handle the variables and object to hold components. State will get player data. State machine will handle loop and pass it to state and chanage state.
+
+State machine handle set input condition(s) like crouch to handle shape collision, player position adjusted.
+
+## player.gd
+```
+class_name Player extends CharacterBody3D
+@onready var collision_shape: CollisionShape3D = $CollisionShape3D
+@onready var mesh_instance: MeshInstance3D = $MeshInstance3D
+@onready var neck: Node3D = $Neck
+@onready var camera: Camera3D = $Neck/Camera3D
+#...
+```
+## state.gd
+```
+class_name State extends Node
+signal finished(next_state_path: String, data: Dictionary)
+func handle_input(_event: InputEvent) -> void:
+func update(_delta: float) -> void:
+func physics_update(_delta: float) -> void:
+func enter(previous_state_path: String, data := {}) -> void:
+func exit() -> void:
+```
+## state_machine.gd
+```
+class_name StateMachine extends Node
+@export var initial_state: State = null
+#...
+func _transition_to_next_state(target_state_path: String, data: Dictionary = {}) -> void:
+
+```
 
 # Credits:
 - https://www.gdquest.com/tutorial/godot/design-patterns/finite-state-machine/

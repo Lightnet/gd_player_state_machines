@@ -1,13 +1,11 @@
 extends PlayerState
 # FLYING
 
-func enter(_previous_state_path: String, _data := {}) -> void:
-	
-	pass
+#func enter(_previous_state_path: String, _data := {}) -> void:	
+	#pass
 
-func handle_input(event: InputEvent) -> void:
-	
-	pass
+#func handle_input(event: InputEvent) -> void:
+	#pass
 
 func physics_update(_delta: float) -> void:
 	var input_dir = Input.get_vector("left","right","forward","backward",-1.0)
