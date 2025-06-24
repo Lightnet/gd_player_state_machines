@@ -38,7 +38,7 @@ func handle_input(event: InputEvent) -> void:
 		#pass
 	#pass
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	var input_dir = Input.get_vector("left","right","forward","backward",-1.0)
 	#print("input_dir: ",input_dir)
 	

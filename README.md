@@ -108,15 +108,16 @@ The system will support vehicle interactions, including:
 	- [ ] climb over
 	- [ ] death
 
-- UI debug
-	- [x] player state
-	- [x] draw line
-	- [x] draw point
+- UI 
+	-debug
+		- [x] player state
+		- [x] draw line
+		- [x] draw point
 - [ ] Vehicle
 	- [x] car
 - [ ] Ladder
 - [ ] Edge Climb
-- [ ] Inventory
+- [x] Inventory
 - [ ] creature
 
 # Design:

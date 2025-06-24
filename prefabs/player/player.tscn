@@ -36,6 +36,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.723565, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Neck"]
 
+[node name="RayCast3D" type="RayCast3D" parent="Neck/Camera3D"]
+target_position = Vector3(0, 0, -2)
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_ev8v4")
 initial_state = NodePath("Idle")

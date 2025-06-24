@@ -1,10 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://bnkmiak55l2fn"]
+[gd_scene load_steps=19 format=3 uid="uid://bnkmiak55l2fn"]
 
 [ext_resource type="Texture2D" uid="uid://dihkml6628xmu" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_1crot"]
 [ext_resource type="PackedScene" uid="uid://mvfpjdjmgvyl" path="res://prefabs/player/player.tscn" id="1_r5ocr"]
+[ext_resource type="Script" uid="uid://br7shwa55u1ek" path="res://inventory/inventory_data.gd" id="2_78bmn"]
 [ext_resource type="Script" uid="uid://4rgcsyaqbjfm" path="res://scripts/ui/ui_player_state.gd" id="3_8au0d"]
+[ext_resource type="Script" uid="uid://h1s642kf3ghg" path="res://inventory/slot_data.gd" id="3_eiei1"]
+[ext_resource type="Script" uid="uid://bk2fww1emg1l0" path="res://inventory/inventory_data_equip.gd" id="4_7pkjl"]
+[ext_resource type="Resource" uid="uid://cmmi21ih6kcoe" path="res://item/items/apple.tres" id="4_eiei1"]
 [ext_resource type="Script" uid="uid://b4dxjfku8hkmx" path="res://scripts/ui/reticle.gd" id="4_l47rc"]
 [ext_resource type="PackedScene" uid="uid://i7h5xi678bli" path="res://prefabs/block_climb/block_climb.tscn" id="5_l47rc"]
+[ext_resource type="PackedScene" uid="uid://cxb811o6q4mb" path="res://inventory/ui_inventory.tscn" id="6_qkiq4"]
+[ext_resource type="Script" uid="uid://btlc7ox1h6jvx" path="res://scripts/player_inventory_management.gd" id="7_a0i2y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jvrg6"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -17,6 +23,22 @@ sky_material = SubResource("ProceduralSkyMaterial_jvrg6")
 background_mode = 2
 sky = SubResource("Sky_l47rc")
 tonemap_mode = 2
+
+[sub_resource type="Resource" id="Resource_kyd4g"]
+script = ExtResource("3_eiei1")
+item_data = ExtResource("4_eiei1")
+quantity = 1
+metadata/_custom_type_script = "uid://h1s642kf3ghg"
+
+[sub_resource type="Resource" id="Resource_gfsir"]
+script = ExtResource("2_78bmn")
+slot_datas = Array[ExtResource("3_eiei1")]([null, null, null, SubResource("Resource_kyd4g"), null, null, null, null, null, null])
+metadata/_custom_type_script = "uid://br7shwa55u1ek"
+
+[sub_resource type="Resource" id="Resource_nrvgq"]
+script = ExtResource("4_7pkjl")
+slot_datas = Array[ExtResource("3_eiei1")]([null])
+metadata/_custom_type_script = "uid://bk2fww1emg1l0"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jvrg6"]
 albedo_texture = ExtResource("1_1crot")
@@ -33,6 +55,8 @@ environment = SubResource("Environment_bqab6")
 
 [node name="Player" parent="." instance=ExtResource("1_r5ocr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55504, 2.74451)
+inventory_data = SubResource("Resource_gfsir")
+equip_inventory_data = SubResource("Resource_nrvgq")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 use_collision = true
@@ -128,3 +152,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.80545, 5.96429, 4.22553)
 
 [node name="block_climb6" parent="." instance=ExtResource("5_l47rc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.80545, 5.96429, 11.2115)
+
+[node name="UI" parent="." instance=ExtResource("6_qkiq4")]
+
+[node name="player_inventory_management" type="Node" parent="." node_paths=PackedStringArray("player", "inventory_interface", "hot_bar_inventory")]
+script = ExtResource("7_a0i2y")
+player = NodePath("../Player")
+inventory_interface = NodePath("../UI/InventoryInterface")
+hot_bar_inventory = NodePath("../UI/HotBarInventory")
+
+[editable path="UI"]

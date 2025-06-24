@@ -1,9 +1,15 @@
 class_name Player extends CharacterBody3D
 
+signal toggle_inventory()
+
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
 @onready var neck: Node3D = $Neck
 @onready var camera: Camera3D = $Neck/Camera3D
+@onready var interact_ray: RayCast3D = $Neck/Camera3D/RayCast3D
+
+@export var inventory_data:InventoryData
+@export var equip_inventory_data:InventoryDataEquip
 
 @export var WALK_SPEED := 5.0
 @export var SPRINT_SPEED = 8.0
@@ -40,6 +46,19 @@ func _ready() -> void:
 	#print("FORWARD: ", Vector3.FORWARD)
 	store_data()
 
+func get_drop_position() -> Vector3:
+	var direction  = -camera.global_transform.basis.z
+	return camera.global_position + direction
+	#pass
+
+func interact() -> void:
+	if interact_ray.is_colliding():
+		print("interact with ", interact_ray.get_collider())
+		if interact_ray.get_collider().has_method("player_interact"):
+			interact_ray.get_collider().player_interact()
+		#pass
+	#pass
+
 func store_data():
 	if collision_shape and collision_shape.shape is CapsuleShape3D:
 		original_shape_height = collision_shape.shape.height
@@ -69,6 +88,13 @@ func _input(event: InputEvent) -> void:
 			
 	if event.is_action_pressed("escape"):
 		get_tree().quit()
+		
+	if Input.is_action_just_pressed("inventory"):
+		toggle_inventory.emit()
+		
+	if Input.is_action_just_pressed("interact"):
+		interact()		
+		#pass
 
 func _physics_process(delta: float) -> void:
 	vaulting(delta)
