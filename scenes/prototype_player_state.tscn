@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bnkmiak55l2fn"]
+[gd_scene load_steps=22 format=3 uid="uid://bnkmiak55l2fn"]
 
 [ext_resource type="Texture2D" uid="uid://dihkml6628xmu" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_1crot"]
 [ext_resource type="PackedScene" uid="uid://mvfpjdjmgvyl" path="res://prefabs/player/player.tscn" id="1_r5ocr"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cxb811o6q4mb" path="res://inventory/ui_inventory.tscn" id="6_qkiq4"]
 [ext_resource type="Script" uid="uid://btlc7ox1h6jvx" path="res://scripts/player_inventory_management.gd" id="7_a0i2y"]
 [ext_resource type="PackedScene" uid="uid://4m2atmckibph" path="res://prefabs/chest_inventory/chest_inventory.tscn" id="12_7pkjl"]
+[ext_resource type="PackedScene" uid="uid://ra47vbksjn8y" path="res://item/pickUp/pick_up.tscn" id="13_gfsir"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jvrg6"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -173,5 +174,8 @@ hot_bar_inventory = NodePath("../UI/HotBarInventory")
 [node name="chest_inventory" parent="." instance=ExtResource("12_7pkjl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.05711, 0, 0.344591)
 inventory_data = SubResource("Resource_7pkjl")
+
+[node name="PickUp" parent="." instance=ExtResource("13_gfsir")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.58996, -0.18, -0.921301)
 
 [editable path="UI"]

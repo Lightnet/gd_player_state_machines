@@ -14,6 +14,9 @@ func _ready() -> void:
 	inventory_interface.set_player_inventory_data(player.inventory_data)
 	inventory_interface.set_equip_inventory_data(player.equip_inventory_data)
 	inventory_interface.force_close.connect(toggle_inventory_interface)
+	#drop item event when in menu
+	inventory_interface.drop_slot_data.connect(_on_inventory_interface_drop_slot_data)
+	
 	hot_bar_inventory.set_inventory_data(player.inventory_data)
 	
 	for node in get_tree().get_nodes_in_group("external_inventory"):
@@ -40,6 +43,7 @@ func toggle_inventory_interface(external_inventory_owner = null) -> void:
 	#pass
 
 func _on_inventory_interface_drop_slot_data(slot_data: SlotData) -> void:
+	print("DROP ITEM???")
 	var pick_up = PICKUP.instantiate()
 	pick_up.slot_data = slot_data
 	#pick_up.position = Vector3.UP

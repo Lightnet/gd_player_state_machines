@@ -1,11 +1,9 @@
-# gd_player_state_machine
+# gd_player_state_machines
 
 # License: MIT
 
 # status:
-- vaulting test.
-- obstacle test.
-- inventory rework is work in progress with player controller as well.
+- player input and inventory testing
 
 # Information:
 	
@@ -120,8 +118,8 @@ The system will support vehicle interactions, including:
 - [ ] Edge Climb
 - [x] Inventory
 	- [x] player ui ()
-	- [ ] drop item
-	- [ ] pick up
+	- [x] drop item
+	- [x] pick up
 	- [x] equip ui (simple test)
 	- [x] chest ui
 - [ ] creature
@@ -138,10 +136,23 @@ The system will support vehicle interactions, including:
 	- [x] walk = normal physics set
 	- [x] fly
 	- [ ] god (no damage / N/A)
-	- [ ] summon item name
+	- [x] summon item_name item_count
 	- [ ] addbots N/A
 	- [ ] killbots N/A
 - ...
+
+# summon commands:
+	To summon item it need to be lower case and space replace underscores which is from item/items folder.
+```
+summon apples
+summon blue_book
+```	
+	Summon item name must match the ItemData.name = "Apples" but lower case for easy summon command.
+```
+summon apples 1
+```
+	You can add many item quantity count. Not added limited for one stack or cap check yet.
+
 
 # State machines:
 There are three files base to handle state machine. One file handle player with character3d. Two file handle the class state and state machine change state.
@@ -175,7 +186,6 @@ class_name StateMachine extends Node
 @export var initial_state: State = null
 #...
 func _transition_to_next_state(target_state_path: String, data: Dictionary = {}) -> void:
-
 ```
 
 # Credits:

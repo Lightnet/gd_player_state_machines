@@ -9,8 +9,7 @@ region = Rect2(0, 448, 32, 32)
 
 [resource]
 script = ExtResource("1_pbjlt")
-name = "Apples"
-description = "AWS"
+name = "Apple"
+description = "Sweet Apple."
 stackable = true
 texture = SubResource("AtlasTexture_nuljg")
-metadata/_custom_type_script = "uid://0xtf6vxr6fg2"

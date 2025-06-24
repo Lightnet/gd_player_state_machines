@@ -9,8 +9,7 @@ region = Rect2(0, 416, 32, 32)
 
 [resource]
 script = ExtResource("1_hopj0")
-name = "Apples"
+name = "Blue Book"
 description = "AWS"
 stackable = false
 texture = SubResource("AtlasTexture_hopj0")
-metadata/_custom_type_script = "uid://0xtf6vxr6fg2"
