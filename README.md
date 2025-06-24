@@ -130,6 +130,21 @@ The system will support vehicle interactions, including:
 ## Controls:
 - W,A,S,D = movement
 - mouse motion = camera
+- tab = inventory
+- E = interact chest
+- Space = Jump
+- C = crouch
+- V = Prone
+- Shift = sprint
+- ESC = quit application
+
+### god, ghost:
+- mouse motion = camera
+- W,A,S,D = movement
+- Shift = down
+- space = up
+
+## dev console commands:
 
 - Backtick / backquote  = console command / Dev Console CMD
 	- [x] ghost =  disable collision (n/a)
@@ -141,7 +156,7 @@ The system will support vehicle interactions, including:
 	- [ ] killbots N/A
 - ...
 
-# summon commands:
+### summon commands:
 	To summon item it need to be lower case and space replace underscores which is from item/items folder.
 ```
 summon apples
