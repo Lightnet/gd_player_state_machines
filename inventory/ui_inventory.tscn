@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://cxb811o6q4mb"]
 
-[ext_resource type="Script" uid="uid://dv6jc7mg06hve" path="res://inventory/inventory_interface.gd" id="1_ew6xj"]
+[ext_resource type="Script" uid="uid://ckj4268ou0eaa" path="res://inventory/inventory_interface.gd" id="1_ew6xj"]
 [ext_resource type="PackedScene" uid="uid://bejcrr8de4ul8" path="res://inventory/inventory.tscn" id="2_4fm1i"]
 [ext_resource type="PackedScene" uid="uid://c5l1jiesfal5" path="res://inventory/slot.tscn" id="3_cp4o6"]
 [ext_resource type="PackedScene" uid="uid://dahrqhj48t1g6" path="res://inventory/hot_bar_inventory.tscn" id="4_w4dsk"]
-[ext_resource type="Script" uid="uid://c8xtwyjohjph0" path="res://scripts/reticle.gd" id="5_ar5ji"]
+[ext_resource type="Script" uid="uid://cchye8dnyf7da" path="res://scripts/reticle.gd" id="5_ar5ji"]
 
 [node name="UI" type="CanvasLayer"]
 
@@ -49,6 +49,7 @@ offset_right = 466.0
 offset_bottom = 26.0
 
 [node name="ExternalInventory" parent="InventoryInterface" instance=ExtResource("2_4fm1i")]
+visible = false
 layout_mode = 0
 offset_left = 645.0
 offset_top = 150.0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dahrqhj48t1g6"]
 
-[ext_resource type="Script" uid="uid://clfxyt60s0ydj" path="res://inventory/hot_bar_inventory.gd" id="1_w6yn8"]
+[ext_resource type="Script" uid="uid://c2uh5ed4pfehr" path="res://inventory/hot_bar_inventory.gd" id="1_w6yn8"]
 
 [node name="HotBarInventory" type="PanelContainer"]
 offset_right = 40.0

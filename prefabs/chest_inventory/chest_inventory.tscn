@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://4m2atmckibph"]
+
+[ext_resource type="Script" uid="uid://cmu0cfgx4356h" path="res://prefabs/chest_inventory/chest01.gd" id="1_nuhxl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tohg0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nuhxl"]
+albedo_color = Color(0, 0.24461, 0.613196, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7pyut"]
+material = SubResource("StandardMaterial3D_nuhxl")
+
+[node name="chest_inventory" type="StaticBody3D" groups=["external_inventory"]]
+script = ExtResource("1_nuhxl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_tohg0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_7pyut")

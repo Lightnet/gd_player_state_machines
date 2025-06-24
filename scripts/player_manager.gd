@@ -23,7 +23,5 @@ func is_enable_controller() -> bool:
 		return false
 		
 	return true
-
-
-
+	
 #

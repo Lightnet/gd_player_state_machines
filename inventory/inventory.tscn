@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bejcrr8de4ul8"]
 
-[ext_resource type="Script" uid="uid://csgvcbybofjtx" path="res://inventory/inventory.gd" id="1_62wf1"]
+[ext_resource type="Script" uid="uid://bg8cw71msl0y2" path="res://inventory/inventory.gd" id="1_62wf1"]
 
 [node name="Inventory" type="PanelContainer"]
 offset_right = 40.0

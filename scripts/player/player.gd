@@ -45,12 +45,12 @@ func _ready() -> void:
 	Console.add_command("god", console_god)
 	#print("FORWARD: ", Vector3.FORWARD)
 	store_data()
-
+# drop item forward position
 func get_drop_position() -> Vector3:
 	var direction  = -camera.global_transform.basis.z
 	return camera.global_position + direction
 	#pass
-
+# interact raycast object for chest inventory
 func interact() -> void:
 	if interact_ray.is_colliding():
 		print("interact with ", interact_ray.get_collider())
@@ -139,10 +139,10 @@ func vaulting(_delta):
 				vault_animation(place_to_land)
 	#pass
 
-# create raycast from vis code
+# create raycast from visual code
 func raycast(from:Vector3, to:Vector3):
 	var space = get_world_3d().direct_space_state
-	var query = PhysicsRayQueryParameters3D.create(from, to, 2)
+	var query = PhysicsRayQueryParameters3D.create(from, to, 2) #layer collision
 	query.collide_with_areas = true
 	return space.intersect_ray(query)
 	#pass

@@ -10,8 +10,7 @@ extends PlayerState
 
 var slide_velocity: Vector3 = Vector3.ZERO  # Current sliding velocity
 
-
-func enter(_previous_state_path: String, data := {}) -> void:
+func enter(_previous_state_path: String, _data := {}) -> void:
 	# Initialize sliding velocity based on player's current velocity or direction
 	slide_velocity = player.velocity
 	if slide_velocity.length() == 0:

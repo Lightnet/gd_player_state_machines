@@ -29,6 +29,7 @@ enabled=PackedStringArray("res://addons/console/plugin.cfg")
 [global_group]
 
 Player=""
+external_inventory="chest, inventory data"
 
 [input]
 

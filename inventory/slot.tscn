@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c5l1jiesfal5"]
 
-[ext_resource type="Script" uid="uid://cwdrb3emawion" path="res://inventory/slot.gd" id="1_u4i3g"]
+[ext_resource type="Script" uid="uid://be3gw27dgq2du" path="res://inventory/slot.gd" id="1_u4i3g"]
 
 [node name="Slot" type="PanelContainer"]
 custom_minimum_size = Vector2(64, 64)

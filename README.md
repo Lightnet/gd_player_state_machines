@@ -5,6 +5,7 @@
 # status:
 - vaulting test.
 - obstacle test.
+- inventory rework is work in progress with player controller as well.
 
 # Information:
 	
@@ -118,6 +119,11 @@ The system will support vehicle interactions, including:
 - [ ] Ladder
 - [ ] Edge Climb
 - [x] Inventory
+	- [x] player ui ()
+	- [ ] drop item
+	- [ ] pick up
+	- [x] equip ui (simple test)
+	- [x] chest ui
 - [ ] creature
 
 # Design:

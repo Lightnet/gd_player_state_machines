@@ -32,6 +32,9 @@ func physics_update(_delta: float) -> void:
 		#print("GRAVITY???")
 		#pass
 	#player.move_and_slide()
+	
+	if not PlayerManager.is_enable_controller():
+		return
 
 	if not player.is_on_floor():
 		finished.emit(FALLING)
