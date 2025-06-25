@@ -117,6 +117,9 @@ The system will support vehicle interactions, including:
 	- [x] car
 	- [x] airplane (need work)
 	- [x] helicopter (need work)
+	- [x] tank (need work)
+		- [x] generate tracks (testing / not use physics)
+		- [ ] path track mesh
 	- [ ] boat
 - [x] Ladder (area3d simple)
 - [ ] Edge Climb

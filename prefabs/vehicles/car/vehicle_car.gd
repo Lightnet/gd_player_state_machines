@@ -7,7 +7,7 @@ class_name VehicleController
 
 # store player
 var player
-var IS_CONTROLLER:bool = false
+@export var IS_CONTROLLER:bool = false
 var is_exit:bool = false
 
 # Configuration variables

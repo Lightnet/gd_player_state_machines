@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="player_state_machines"
-run/main_scene="uid://ddsmkb73alei4"
+run/main_scene="uid://cvmwidmw1byyq"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
