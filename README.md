@@ -117,6 +117,7 @@ The system will support vehicle interactions, including:
 	- [x] car
 - [ ] Ladder
 - [ ] Edge Climb
+- [x] door (simple)
 - [x] Inventory
 	- [x] player ui ()
 	- [x] drop item
