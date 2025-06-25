@@ -115,7 +115,10 @@ The system will support vehicle interactions, including:
 - [ ] Vehicle
 	- [x] interact (simple test need work)
 	- [x] car
-- [ ] Ladder
+	- [ ] airplane
+	- [ ] helicopter
+	- [ ] boat
+- [x] Ladder (area3d simple)
 - [ ] Edge Climb
 - [x] door (simple)
 - [x] Inventory

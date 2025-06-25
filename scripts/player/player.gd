@@ -239,3 +239,15 @@ func exit_vehicle_show()->void:
 	set_process_input(true)
 	camera.make_current()
 	#pass
+
+# for area3d
+func enter_ladder():
+	var state = statemachine.state
+	state.finished.emit(state.LADDER)
+	#pass
+	
+# for area3d
+func enter_idle():
+	var state = statemachine.state
+	state.finished.emit(state.IDLE)
+	#pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bnkmiak55l2fn"]
+[gd_scene load_steps=24 format=3 uid="uid://bnkmiak55l2fn"]
 
 [ext_resource type="Texture2D" uid="uid://dihkml6628xmu" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_1crot"]
 [ext_resource type="PackedScene" uid="uid://mvfpjdjmgvyl" path="res://prefabs/player/player.tscn" id="1_r5ocr"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cxb811o6q4mb" path="res://inventory/ui_inventory.tscn" id="6_qkiq4"]
 [ext_resource type="Script" uid="uid://btlc7ox1h6jvx" path="res://scripts/player_inventory_management.gd" id="7_a0i2y"]
 [ext_resource type="PackedScene" uid="uid://jg1qx3d4mn2t" path="res://prefabs/door/door.tscn" id="7_nrvgq"]
+[ext_resource type="PackedScene" uid="uid://cn07gtp8s53bo" path="res://prefabs/ladder/ladder.tscn" id="10_kyd4g"]
 [ext_resource type="PackedScene" uid="uid://4m2atmckibph" path="res://prefabs/chest_inventory/chest_inventory.tscn" id="12_7pkjl"]
 [ext_resource type="PackedScene" uid="uid://ra47vbksjn8y" path="res://item/pickUp/pick_up.tscn" id="13_gfsir"]
 
@@ -62,7 +63,7 @@ shadow_enabled = true
 environment = SubResource("Environment_bqab6")
 
 [node name="Player" parent="." instance=ExtResource("1_r5ocr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.55504, 2.74451)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.71431, 0.55504, 0.871136)
 inventory_data = SubResource("Resource_gfsir")
 equip_inventory_data = SubResource("Resource_nrvgq")
 
@@ -84,7 +85,7 @@ transform = Transform3D(0.518117, -0.85531, 0, 0.85531, 0.518117, 0, 0, 0, 1, 32
 size = Vector3(3, 40, 30.4838)
 
 [node name="door" parent="CSGCombiner3D" instance=ExtResource("7_nrvgq")]
-transform = Transform3D(1, 0.000564223, -0.000344359, -0.000564203, 1, 5.43026e-05, 0.000344392, -5.4092e-05, 1, 9.79938, -0.5, 0.422949)
+transform = Transform3D(1, 0.000564223, -0.000344359, -0.000564203, 1, 5.43026e-05, 0.000344392, -5.4092e-05, 1, 12.562, -0.5, 0.422949)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -141,7 +142,10 @@ size = Vector2i(361, 325)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
-transform = Transform3D(-0.11934, 0, 0.992853, 0, 1, 0, -0.992853, 0, -0.11934, 4.03532, 0.23859, -3.31459)
+transform = Transform3D(-0.11934, 0, 0.992853, 0, 1, 0, -0.992853, 0, -0.11934, 15.4807, 0.23859, -3.31459)
+
+[node name="StaticBody3D" parent="CanvasLayer/SubViewportContainer/SubViewport" instance=ExtResource("10_kyd4g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.86647, -0.5, -3.23025)
 
 [node name="block_climb" parent="." instance=ExtResource("5_l47rc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -3)
@@ -151,6 +155,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.80545, 3.44258, -3)
 
 [node name="block_climb7" parent="." instance=ExtResource("5_l47rc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.19455, 3.44258, -3)
+
+[node name="block_climb8" parent="." instance=ExtResource("5_l47rc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.70415, 2.50997, -4.39733)
 
 [node name="block_climb3" parent="." instance=ExtResource("5_l47rc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.80545, 5.96429, -0.0133977)

@@ -11,6 +11,7 @@ const PRONE = "Prone"
 const FLYING = "Flying"
 const GHOST = "Ghost"
 const SLIDING = "Sliding"
+const LADDER = "Ladder"
  
 var toggle_croucn:bool = true
 var toggle_prone:bool = true

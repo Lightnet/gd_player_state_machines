@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://mvfpjdjmgvyl"]
+[gd_scene load_steps=18 format=3 uid="uid://mvfpjdjmgvyl"]
 
 [ext_resource type="Script" uid="uid://brpdoe05bct2i" path="res://scripts/player/player.gd" id="1_iylwk"]
 [ext_resource type="Script" uid="uid://brjnfuu7keq31" path="res://scripts/state_machines/state_machine.gd" id="2_ev8v4"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://dvh68qnllrbj0" path="res://scripts/state_machines/player/crouching.gd" id="10_30gqm"]
 [ext_resource type="Script" uid="uid://db326fdul78hn" path="res://scripts/state_machines/player/sliding.gd" id="11_hvqk4"]
 [ext_resource type="Script" uid="uid://dmt2kr8bujxmi" path="res://scripts/state_machines/player/prone.gd" id="12_b6byk"]
+[ext_resource type="Script" uid="uid://clx4tmefiby7u" path="res://scripts/state_machines/player/ladder.gd" id="13_6barq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r5ocr"]
 
@@ -73,6 +74,9 @@ script = ExtResource("11_hvqk4")
 
 [node name="Prone" type="Node" parent="StateMachine"]
 script = ExtResource("12_b6byk")
+
+[node name="Ladder" type="Node" parent="StateMachine"]
+script = ExtResource("13_6barq")
 
 [node name="obstacle_detector_top" type="Area3D" parent="."]
 
