@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://cdqfbk85c8eg8"]
+
+[ext_resource type="Script" uid="uid://dn1r8ofxartic" path="res://prefabs/vehicles/helicopter01/helicopter_01.gd" id="1_pttad"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rs7ck"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ocm1d"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_y1t6t"]
+size = Vector3(6, 0.2, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4mqkk"]
+size = Vector3(0.1, 1, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pttad"]
+size = Vector3(0.5, 0.5, 2)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rs7ck"]
+height = 0.5
+
+[node name="Helicopter01" type="VehicleBody3D"]
+mass = 160.0
+script = ExtResource("1_pttad")
+main_propellor_path = NodePath("Top_fan")
+back_propellor_path = NodePath("Rear_fan")
+right_wheel_path = NodePath("RearRightWheel")
+left_wheel_path = NodePath("RearLeftWheel")
+front_wheel_path = NodePath("FrontWheel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_rs7ck")
+
+[node name="Front" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ocm1d")
+
+[node name="Top_fan" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.763186, 0)
+mesh = SubResource("BoxMesh_y1t6t")
+
+[node name="Rear_fan" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.454174, -0.0195067, 2.26006)
+mesh = SubResource("BoxMesh_4mqkk")
+
+[node name="Back" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.44752)
+mesh = SubResource("BoxMesh_pttad")
+
+[node name="RearRightWheel" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.952287, -0.65669, 0.609051)
+use_as_traction = true
+wheel_roll_influence = 0.8
+suspension_stiffness = 50.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RearRightWheel"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_rs7ck")
+
+[node name="RearLeftWheel" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.886463, -0.65669, 0.609051)
+use_as_traction = true
+wheel_roll_influence = 0.8
+suspension_stiffness = 50.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RearLeftWheel"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_rs7ck")
+
+[node name="FrontWheel" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.0551789, -0.65669, -1.1864)
+use_as_steering = true
+wheel_roll_influence = 0.8
+suspension_stiffness = 50.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FrontWheel"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_rs7ck")
+
+[node name="Camera_Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Camera_Pivot"]
+spring_length = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="Camera_Pivot/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.85196)

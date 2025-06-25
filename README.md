@@ -103,7 +103,7 @@ The system will support vehicle interactions, including:
 	- [x] prone (simple test)
 	- [x] ghost (disable collision)
 	- [x] fly
-	- [ ] ladder
+	- [x] ladder
 	- [ ] climb over
 	- [ ] death
 
@@ -115,8 +115,8 @@ The system will support vehicle interactions, including:
 - [ ] Vehicle
 	- [x] interact (simple test need work)
 	- [x] car
-	- [ ] airplane
-	- [ ] helicopter
+	- [x] airplane (need work)
+	- [x] helicopter (need work)
 	- [ ] boat
 - [x] Ladder (area3d simple)
 - [ ] Edge Climb

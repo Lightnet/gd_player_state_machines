@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dsrq4v6pyhb72"]
 
-[ext_resource type="Script" uid="uid://b0uk8iyui8gr1" path="res://prefabs/vehicle/car/vehicle_car.gd" id="1_ej60e"]
+[ext_resource type="Script" uid="uid://b0uk8iyui8gr1" path="res://prefabs/vehicles/car/vehicle_car.gd" id="1_ej60e"]
 [ext_resource type="Texture2D" uid="uid://bm40xph16eexn" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="1_mxu3a"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_for6x"]

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dihkml6628xmu" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_gkhi4"]
 [ext_resource type="Script" uid="uid://cmod3uchr1fx0" path="res://scripts/vehicles/vehicle_mph.gd" id="2_jwmev"]
 [ext_resource type="PackedScene" uid="uid://i7h5xi678bli" path="res://prefabs/block_climb/block_climb.tscn" id="4_hi741"]
-[ext_resource type="PackedScene" uid="uid://dsrq4v6pyhb72" path="res://prefabs/vehicle/car/vehicle_car.tscn" id="5_ho7ok"]
+[ext_resource type="PackedScene" uid="uid://dsrq4v6pyhb72" path="res://prefabs/vehicles/car/vehicle_car.tscn" id="5_ho7ok"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jvrg6"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)

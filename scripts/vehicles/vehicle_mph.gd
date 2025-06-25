@@ -1,7 +1,7 @@
 extends Control
 
 @export var label_mph: Label
-@export var vehicle_body_3d: VehicleController
+@export var vehicle_body_3d: Node3D
 @onready var speedometer_needle: ColorRect = $SpeedometerNeedle
 
 func _ready() -> void:

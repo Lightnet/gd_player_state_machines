@@ -1,0 +1,103 @@
+[gd_scene load_steps=10 format=3 uid="uid://bqybdt0omfshm"]
+
+[ext_resource type="Script" uid="uid://idkdy4w24m1h" path="res://prefabs/vehicles/airplane01/airplane_01.gd" id="1_x1j3d"]
+[ext_resource type="Script" uid="uid://cgg3eu3o65cy6" path="res://prefabs/vehicles/airplane01/camera01.gd" id="2_k24ip"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bdtkb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x1j3d"]
+size = Vector3(0.5, 0.5, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bdtkb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_x1j3d"]
+size = Vector3(0.5, 0.5, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_k24ip"]
+size = Vector3(2, 0.1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bdtkb"]
+height = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_dknsh"]
+size = Vector3(0.2, 2, 0.1)
+
+[node name="Airplane" type="VehicleBody3D" node_paths=PackedStringArray("propellor")]
+script = ExtResource("1_x1j3d")
+propellor = NodePath("Fan")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_bdtkb")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.40307)
+shape = SubResource("BoxShape3D_x1j3d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_bdtkb")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.39843)
+mesh = SubResource("BoxMesh_x1j3d")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48911, 0, -0.031523)
+mesh = SubResource("BoxMesh_k24ip")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.47413, 0, -0.031523)
+mesh = SubResource("BoxMesh_k24ip")
+
+[node name="Node3D" type="Node3D" parent="." node_paths=PackedStringArray("camera", "spring_arm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.882967, 0)
+script = ExtResource("2_k24ip")
+camera = NodePath("SpringArm3D/Camera3D")
+spring_arm = NodePath("SpringArm3D")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Node3D"]
+spring_length = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="Node3D/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.21802)
+
+[node name="FR_Wheel" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.8, -0.66, -0.462369)
+use_as_traction = true
+use_as_steering = true
+wheel_roll_influence = 1.0
+suspension_travel = 0.1
+suspension_stiffness = 50.0
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="FR_Wheel"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_bdtkb")
+skeleton = NodePath("../..")
+
+[node name="FL_Wheel" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.8, -0.66, -0.462369)
+use_as_traction = true
+use_as_steering = true
+wheel_roll_influence = 1.0
+suspension_travel = 0.1
+suspension_stiffness = 50.0
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="FL_Wheel"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_bdtkb")
+skeleton = NodePath("../..")
+
+[node name="RB_Wheel" type="VehicleWheel3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.66, 2.879)
+use_as_traction = true
+wheel_roll_influence = 1.0
+suspension_travel = 0.1
+suspension_stiffness = 50.0
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="RB_Wheel"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_bdtkb")
+skeleton = NodePath("../..")
+
+[node name="Fan" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.89705)
+mesh = SubResource("BoxMesh_dknsh")
