@@ -15,12 +15,11 @@ height = 0.5
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cr6q"]
 albedo_texture = ExtResource("1_mxu3a")
 
-[node name="VehicleCar" type="VehicleBody3D"]
+[node name="VehicleCar" type="VehicleBody3D" node_paths=PackedStringArray("exit_point")]
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -1, 0)
-engine_force = 200.0
-brake = 10.0
 script = ExtResource("1_ej60e")
+exit_point = NodePath("ExitPoint")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.415892, 0)
@@ -32,8 +31,6 @@ mesh = SubResource("BoxMesh_17id2")
 
 [node name="WheelFront_Left" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33515, -0.907605, 1.73037)
-engine_force = 200.0
-brake = 10.0
 use_as_traction = true
 use_as_steering = true
 wheel_roll_influence = 0.99
@@ -47,8 +44,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_2cr6q")
 
 [node name="WheelFront_Right" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.335, -0.908, 1.73)
-engine_force = 200.0
-brake = 10.0
 use_as_traction = true
 use_as_steering = true
 wheel_roll_influence = 0.99
@@ -62,8 +57,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_2cr6q")
 
 [node name="WheelRear_Right" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.335, -0.908, -1.509)
-engine_force = 200.0
-brake = 10.0
 use_as_traction = true
 wheel_roll_influence = 0.99
 suspension_stiffness = 50.0
@@ -76,8 +69,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_2cr6q")
 
 [node name="WheelRear_Left" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.335, -0.908, -1.509)
-engine_force = 200.0
-brake = 10.0
 use_as_traction = true
 wheel_roll_influence = 0.99
 suspension_stiffness = 50.0
@@ -93,3 +84,12 @@ transform = Transform3D(-1, 0, -8.74228e-08, -4.15347e-08, 0.879931, 0.475102, 7
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.04761, 0)
+
+[node name="ExitPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.63772, -0.485097, 0.603241)
+
+[node name="exit_time" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="exit_time" to="." method="_on_exit_time_timeout"]

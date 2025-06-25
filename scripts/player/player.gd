@@ -54,8 +54,9 @@ func get_drop_position() -> Vector3:
 func interact() -> void:
 	if interact_ray.is_colliding():
 		print("interact with ", interact_ray.get_collider())
-		if interact_ray.get_collider().has_method("player_interact"):
-			interact_ray.get_collider().player_interact()
+		var collider = interact_ray.get_collider()
+		if collider.has_method("player_interact"):
+			collider.player_interact(self)
 		#pass
 	#pass
 
@@ -213,3 +214,28 @@ func console_walk():
 	
 func console_god():
 	pass
+
+func disable_controller()->void:
+	IS_CONTROLLER = false
+	#camera.dis
+	#pass
+func enable_controller()->void:
+	IS_CONTROLLER = true
+	camera.make_current()
+
+func enter_vehicle_hide()->void:
+	IS_CONTROLLER=false
+	visible = false
+	set_process_input(false)
+	set_physics_process(false)
+	set_process_input(false)
+	#pass
+
+func exit_vehicle_show()->void:
+	IS_CONTROLLER=true
+	visible = true
+	set_process_input(true)
+	set_physics_process(true)
+	set_process_input(true)
+	camera.make_current()
+	#pass

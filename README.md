@@ -113,6 +113,7 @@ The system will support vehicle interactions, including:
 		- [x] draw line
 		- [x] draw point
 - [ ] Vehicle
+	- [x] interact (simple test need work)
 	- [x] car
 - [ ] Ladder
 - [ ] Edge Climb
