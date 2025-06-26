@@ -133,4 +133,12 @@ func _ready() -> void:
 	pass
 ```
 
-
+# refs:
+- https://www.youtube.com/watch?v=EX0oIS_BD70  Advanced State Machine - Learn Godot 4 3D - no talking
+- https://www.youtube.com/watch?v=cMtEagxz4h0 Programming Wallrunning in my Game with Godot
+- https://www.youtube.com/watch?v=K9JizfQ-oFU
+- 
+- 
+- 
+- 
+- 

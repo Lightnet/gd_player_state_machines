@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://d26uwi8kabgcl"]
+
+[ext_resource type="Script" uid="uid://dgvb52obbstg1" path="res://prefabs/player/prototype_player.gd" id="1_y1n8u"]
+[ext_resource type="Script" uid="uid://cdnfl0wocyrip" path="res://scripts/debug/draw3d.gd" id="14_ci3o6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r5ocr"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8au0d"]
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+collision_layer = 2
+script = ExtResource("1_y1n8u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_r5ocr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_8au0d")
+
+[node name="Neck" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.723565, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Neck"]
+
+[node name="RayCast3D" type="RayCast3D" parent="Neck/Camera3D"]
+target_position = Vector3(0, 0, -2)
+
+[node name="draw3d" type="Node" parent="."]
+editor_description = "Debug Draw 3D"
+script = ExtResource("14_ci3o6")
+
+[node name="tool" type="Node3D" parent="."]
+
+[node name="wall_run" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="wall_run" to="." method="_on_wall_run_timeout"]

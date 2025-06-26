@@ -35,6 +35,7 @@ func physics_update(_delta: float) -> void:
 	
 	if not PlayerManager.is_enable_controller():
 		return
+	await get_tree().create_timer(0.2)
 
 	if not player.is_on_floor():
 		finished.emit(FALLING)
