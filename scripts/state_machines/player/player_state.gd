@@ -12,6 +12,7 @@ const FLYING = "Flying"
 const GHOST = "Ghost"
 const SLIDING = "Sliding"
 const LADDER = "Ladder"
+const WALLRUNNING = "WallRunning"
  
 var toggle_croucn:bool = true
 var toggle_prone:bool = true

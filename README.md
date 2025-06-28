@@ -95,6 +95,7 @@ The system will support vehicle interactions, including:
 	- [x] idle
 	- [x] walk
 	- [x] sprint
+	- [x] wall run (wip)
 	- [x] jump
 	- [x] edge climb with area 3d (wip)
 	- [x] fall

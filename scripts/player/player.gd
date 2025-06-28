@@ -34,6 +34,8 @@ var original_position_y: float
 @onready var draw_3d: Node = $draw3d
 @export var statemachine:Node
 
+var wall_normal:Vector3
+
 var obstacles:Array
 
 func _ready() -> void:
@@ -251,3 +253,9 @@ func enter_idle():
 	var state = statemachine.state
 	state.finished.emit(state.IDLE)
 	#pass
+
+func set_wall_normal(norm:Vector3):
+	wall_normal = norm
+	
+#func get_wall_normal() -> Vector3:
+	#return wall_normal

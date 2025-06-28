@@ -24,6 +24,10 @@ func physics_update(delta: float) -> void:
 	#player.velocity.y += (player.GRAVITY * player.get_gravity().y) * delta
 	player.velocity.y += (player.get_gravity().y * player.GRAVITY_FALL) * delta
 	player.move_and_slide()
+	
+	# if hit wall and space hold to wall run
+	if player.is_on_wall() and Input.is_action_pressed("jump"):
+		finished.emit(WALLRUNNING)
 
 	if player.is_on_floor():
 		if is_equal_approx(input_direction_x, 0.0):

@@ -65,7 +65,7 @@ shadow_enabled = true
 environment = SubResource("Environment_bqab6")
 
 [node name="Player" parent="." instance=ExtResource("1_r5ocr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.71431, 0.55504, 0.871136)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0884, 0.55504, -4.35899)
 inventory_data = SubResource("Resource_gfsir")
 equip_inventory_data = SubResource("Resource_nrvgq")
 
@@ -75,6 +75,11 @@ use_collision = true
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 size = Vector3(32, 1, 32)
+material = SubResource("StandardMaterial3D_jvrg6")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2, -10.8514)
+size = Vector3(10, 5, 1)
 material = SubResource("StandardMaterial3D_jvrg6")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]

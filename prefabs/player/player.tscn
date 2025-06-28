@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://mvfpjdjmgvyl"]
+[gd_scene load_steps=19 format=3 uid="uid://mvfpjdjmgvyl"]
 
 [ext_resource type="Script" uid="uid://brpdoe05bct2i" path="res://scripts/player/player.gd" id="1_iylwk"]
 [ext_resource type="Script" uid="uid://brjnfuu7keq31" path="res://scripts/state_machines/state_machine.gd" id="2_ev8v4"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://db326fdul78hn" path="res://scripts/state_machines/player/sliding.gd" id="11_hvqk4"]
 [ext_resource type="Script" uid="uid://dmt2kr8bujxmi" path="res://scripts/state_machines/player/prone.gd" id="12_b6byk"]
 [ext_resource type="Script" uid="uid://clx4tmefiby7u" path="res://scripts/state_machines/player/ladder.gd" id="13_6barq"]
+[ext_resource type="Script" uid="uid://bivmht7l2qym4" path="res://scripts/state_machines/player/wallrunning.gd" id="14_agiw0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r5ocr"]
 
@@ -47,6 +48,11 @@ initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("3_vhck3")
+
+[node name="WallRunning" type="Node" parent="StateMachine"]
+script = ExtResource("14_agiw0")
+
+[node name="time_wall_run" type="Timer" parent="StateMachine/WallRunning"]
 
 [node name="Running" type="Node" parent="StateMachine"]
 script = ExtResource("4_2c4n1")
@@ -91,5 +97,6 @@ script = ExtResource("7_ev8v4")
 
 [node name="tool" type="Node3D" parent="."]
 
+[connection signal="timeout" from="StateMachine/WallRunning/time_wall_run" to="StateMachine/WallRunning" method="_on_time_wall_run_timeout"]
 [connection signal="body_entered" from="obstacle_detector_top" to="." method="_on_obstacle_detector_top_body_entered"]
 [connection signal="body_exited" from="obstacle_detector_top" to="." method="_on_obstacle_detector_top_body_exited"]

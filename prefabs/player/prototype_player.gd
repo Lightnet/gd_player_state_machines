@@ -1,5 +1,5 @@
 extends CharacterBody3D
-
+# testing normal without state machine
 @onready var camera: Camera3D = $Neck/Camera3D
 @onready var t_wall_run: Timer = $wall_run
 
