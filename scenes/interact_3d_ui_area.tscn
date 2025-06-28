@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://djjgd7wxj16vy"]
+
+[ext_resource type="Script" uid="uid://dg8gshr2cobya" path="res://scripts/tests/node_3d_interact_ui_area3d.gd" id="1_3ck4e"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gbygy"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_k74n4"]
+sky_material = SubResource("ProceduralSkyMaterial_gbygy")
+
+[sub_resource type="Environment" id="Environment_spnwv"]
+background_mode = 2
+sky = SubResource("Sky_k74n4")
+tonemap_mode = 2
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_k74n4"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gbygy"]
+size = Vector3(5.1, 5.1, 0.1)
+
+[node name="area_interact_ui" type="Node3D"]
+script = ExtResource("1_3ck4e")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_spnwv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.0691)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = SubResource("ViewportTexture_k74n4")
+
+[node name="Area3D" type="Area3D" parent="Sprite3D"]
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sprite3D/Area3D"]
+shape = SubResource("BoxShape3D_gbygy")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="Control" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Button" type="Button" parent="SubViewport/Control"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 4.0
+offset_right = 295.0
+offset_bottom = 153.0
+text = "Test"
+
+[node name="TextEdit" type="TextEdit" parent="SubViewport/Control"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 181.0
+offset_right = 328.0
+offset_bottom = 294.0
+
+[connection signal="pressed" from="SubViewport/Control/Button" to="." method="_on_button_pressed"]

@@ -7,7 +7,7 @@ func _ready() -> void:
 	animation_player.animation_finished.connect(on_finish_animation)
 	pass
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func player_interact(current_player=null) -> void:

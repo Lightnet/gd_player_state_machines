@@ -4,5 +4,5 @@ signal toggle_inventory(external_inventory_owner)
 
 @export var inventory_data:InventoryData
 
-func player_interact(current_player=null) -> void:
+func player_interact(_current_player=null) -> void:
 	toggle_inventory.emit(self)

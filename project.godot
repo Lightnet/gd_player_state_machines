@@ -11,7 +11,8 @@ config_version=5
 [application]
 
 config/name="player_state_machines"
-run/main_scene="uid://bnkmiak55l2fn"
+config/tags=PackedStringArray("3d", "character", "experiment", "inventory", "prototype", "starterkit", "subviewport")
+run/main_scene="uid://djjgd7wxj16vy"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
