@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://mvfpjdjmgvyl"]
+[gd_scene load_steps=21 format=3 uid="uid://mvfpjdjmgvyl"]
 
 [ext_resource type="Script" uid="uid://brpdoe05bct2i" path="res://scripts/player/player.gd" id="1_iylwk"]
 [ext_resource type="Script" uid="uid://brjnfuu7keq31" path="res://scripts/state_machines/state_machine.gd" id="2_ev8v4"]
+[ext_resource type="PackedScene" uid="uid://nj6hytbscjha" path="res://prefabs/weapons/sample_gun/sample_gun.tscn" id="2_ot5ig"]
 [ext_resource type="Script" uid="uid://ccx863yttm2ea" path="res://scripts/state_machines/player/idle.gd" id="3_vhck3"]
 [ext_resource type="Script" uid="uid://bir260nvjgs6g" path="res://scripts/state_machines/player/running.gd" id="4_2c4n1"]
 [ext_resource type="Script" uid="uid://b1pal1jm5bjmf" path="res://scripts/state_machines/player/jumping.gd" id="5_oo3uv"]
@@ -15,6 +16,7 @@
 [ext_resource type="Script" uid="uid://dmt2kr8bujxmi" path="res://scripts/state_machines/player/prone.gd" id="12_b6byk"]
 [ext_resource type="Script" uid="uid://clx4tmefiby7u" path="res://scripts/state_machines/player/ladder.gd" id="13_6barq"]
 [ext_resource type="Script" uid="uid://bivmht7l2qym4" path="res://scripts/state_machines/player/wallrunning.gd" id="14_agiw0"]
+[ext_resource type="Script" uid="uid://dp2dxy4nkfeit" path="res://scripts/weapons/weapons01.gd" id="17_t13t3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r5ocr"]
 
@@ -41,6 +43,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.723565, 0)
 
 [node name="RayCast3D" type="RayCast3D" parent="Neck/Camera3D"]
 target_position = Vector3(0, 0, -2)
+
+[node name="Right" type="Node3D" parent="Neck/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.293248, -0.435013, -0.722561)
+
+[node name="gun" parent="Neck/Camera3D/Right" instance=ExtResource("2_ot5ig")]
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_ev8v4")
@@ -96,6 +103,12 @@ editor_description = "Debug Draw 3D"
 script = ExtResource("7_ev8v4")
 
 [node name="tool" type="Node3D" parent="."]
+
+[node name="Equipements" type="Node3D" parent="."]
+
+[node name="Weapons" type="Node3D" parent="." node_paths=PackedStringArray("right_weapon")]
+script = ExtResource("17_t13t3")
+right_weapon = NodePath("../Neck/Camera3D/Right/gun")
 
 [connection signal="timeout" from="StateMachine/WallRunning/time_wall_run" to="StateMachine/WallRunning" method="_on_time_wall_run_timeout"]
 [connection signal="body_entered" from="obstacle_detector_top" to="." method="_on_obstacle_detector_top_body_entered"]

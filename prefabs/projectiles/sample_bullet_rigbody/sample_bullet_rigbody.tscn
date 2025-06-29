@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8lyjlubit36h"]
+
+[ext_resource type="Script" uid="uid://dus2o38wbhj0o" path="res://prefabs/projectiles/sample_bullet_rigbody/sample_bullet_rigbody.gd" id="1_j6cjk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mtkpt"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5mcer"]
+albedo_color = Color(0.729782, 0.0133471, 0.0626294, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8wrd8"]
+material = SubResource("StandardMaterial3D_5mcer")
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="sample_bullet_rigbody" type="RigidBody3D"]
+mass = 0.1
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_j6cjk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_mtkpt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_8wrd8")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

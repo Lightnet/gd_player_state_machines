@@ -1,0 +1,33 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://clpdkueijcpwh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c8use"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_si13y"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1.19209e-07, 2, 2, 2),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/38AAP//AAD/f///AAAAAP9//v///wAA/38AAAAAAAAAAP9///8AAP///38AAAAA////f///AAAAAP9/AAAAAA==")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "muzzle_flash01_Cube"
+_surfaces = [{
+"aabb": AABB(-1, -1, -1.19209e-07, 2, 2, 2),
+"attribute_data": PackedByteArray("/////wAAAAD//wAAAAD///////8AAAAA//8AAAAA//8="),
+"format": 34896613399,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUA"),
+"material": SubResource("StandardMaterial3D_c8use"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/38AAP///7//f///AAD/v/9//v////+//38AAAAA/78AAP9///9U1f///38AAFTV////f///VNUAAP9/AABU1f9//v//f/7//3/+//9///+qqqqqqqqqqqqqqqqqqqqq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_si13y")

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cucf3sp344qb2"]
+
+[ext_resource type="Texture2D" uid="uid://rnlma1lylmha" path="res://addons/kenney_prototype_textures/green/texture_10.png" id="1_x875d"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hncdv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u2v4l"]
+albedo_texture = ExtResource("1_x875d")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_hncdv"]
+material = SubResource("StandardMaterial3D_u2v4l")
+
+[node name="MoveBody3D" type="AnimatableBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_hncdv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_hncdv")

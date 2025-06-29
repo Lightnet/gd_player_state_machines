@@ -43,7 +43,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not IS_CONTROLLER:
 		return
-	if event.is_action_pressed("interact") and is_exit == true:
+	if event.is_action_pressed("interact") and is_exit == true and not player:
 		print("car exit")
 		IS_CONTROLLER = false
 		#player.enable_controller()

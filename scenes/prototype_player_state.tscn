@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bnkmiak55l2fn"]
+[gd_scene load_steps=28 format=3 uid="uid://bnkmiak55l2fn"]
 
 [ext_resource type="Texture2D" uid="uid://dihkml6628xmu" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_1crot"]
 [ext_resource type="PackedScene" uid="uid://mvfpjdjmgvyl" path="res://prefabs/player/player.tscn" id="1_r5ocr"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://de0u3vc30w0q3" path="res://prefabs/button/button.tscn" id="16_0vw2k"]
 [ext_resource type="Script" uid="uid://c66iuh8hccxe4" path="res://scripts/tests/await_time.gd" id="17_ag0r3"]
 [ext_resource type="PackedScene" uid="uid://we4b7eu6lq56" path="res://prefabs/text3d/text_3d.tscn" id="18_mdi6p"]
+[ext_resource type="PackedScene" uid="uid://cucf3sp344qb2" path="res://prefabs/movebody/move_body_3d.tscn" id="19_to7hs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jvrg6"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -222,5 +223,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05396, -0.35312, -1.69481)
 text = "Space to Edge Vault
 Marker edge line
 "
+
+[node name="MoveBody3D" parent="." instance=ExtResource("19_to7hs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 
 [editable path="UI"]

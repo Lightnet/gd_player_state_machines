@@ -12,7 +12,6 @@ signal console_opened
 signal console_closed
 signal console_unknown_command
 
-
 class ConsoleCommand:
 	var function : Callable
 	var arguments : PackedStringArray

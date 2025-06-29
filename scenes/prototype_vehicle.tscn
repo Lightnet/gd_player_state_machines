@@ -98,9 +98,20 @@ offset_top = 70.0
 offset_right = 123.0
 offset_bottom = 72.0
 
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 82.0
+offset_right = 258.0
+offset_bottom = 343.0
+text = "A,D = turn
+W,S = forward and backward
+Space = brake"
+
 [node name="block_climb" parent="." instance=ExtResource("4_hi741")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.5, -3)
 
 [node name="VehicleBody3D" parent="." instance=ExtResource("5_ho7ok")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23243, -4.82926)
 physics_material_override = SubResource("PhysicsMaterial_y3qgi")
+IS_CONTROLLER = true

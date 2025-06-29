@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccmraws5hy602"]
+
+[ext_resource type="Script" uid="uid://kdffo3610uf1" path="res://prefabs/projectiles/sample_bullet_raycast/sample_bullet_raycast.gd" id="1_8ws4n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5mcer"]
+albedo_color = Color(0.729782, 0.0133471, 0.0626294, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8wrd8"]
+material = SubResource("StandardMaterial3D_5mcer")
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="sample_bullet_raycast" type="Node3D"]
+script = ExtResource("1_8ws4n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_8wrd8")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -100)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
