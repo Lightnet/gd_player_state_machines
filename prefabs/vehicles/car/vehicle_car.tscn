@@ -15,10 +15,12 @@ height = 0.5
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cr6q"]
 albedo_texture = ExtResource("1_mxu3a")
 
-[node name="VehicleCar" type="VehicleBody3D" node_paths=PackedStringArray("exit_point")]
+[node name="VehicleCar" type="VehicleBody3D" node_paths=PackedStringArray("camera", "exit_timer", "exit_point")]
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -1, 0)
 script = ExtResource("1_ej60e")
+camera = NodePath("Camera3D")
+exit_timer = NodePath("exit_timer")
 exit_point = NodePath("ExitPoint")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -86,8 +88,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.04761, 0)
 [node name="ExitPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.63772, -0.485097, 0.603241)
 
-[node name="exit_time" type="Timer" parent="."]
+[node name="exit_timer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
 
-[connection signal="timeout" from="exit_time" to="." method="_on_exit_time_timeout"]
+[connection signal="timeout" from="exit_timer" to="." method="_on_exit_time_timeout"]

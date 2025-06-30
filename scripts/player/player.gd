@@ -18,7 +18,7 @@ signal toggle_inventory()
 @export var GRAVITY := 9.8
 @export var GRAVITY_FALL := 0.9
 @export var AIR_CONTROL_SPEED := 5.0
-@export var IS_CONTROLLER: = true # handle when the menu N/A
+@export var is_controller: = true # handle when the menu N/A
 @export var CROUCH_HEIGHT_SCALE = 0.5
 @export var CROUCH_RADIUS_SCALE = 0.8
 @export var CROUCH_SPEED = 2.5 
@@ -218,15 +218,15 @@ func console_god():
 	pass
 
 func disable_controller()->void:
-	IS_CONTROLLER = false
+	is_controller = false
 	#camera.dis
 	#pass
 func enable_controller()->void:
-	IS_CONTROLLER = true
+	is_controller = true
 	camera.make_current()
 
 func enter_vehicle_hide()->void:
-	IS_CONTROLLER=false
+	is_controller=false
 	visible = false
 	set_process_input(false)
 	set_physics_process(false)
@@ -234,7 +234,7 @@ func enter_vehicle_hide()->void:
 	#pass
 
 func exit_vehicle_show()->void:
-	IS_CONTROLLER=true
+	is_controller=true
 	visible = true
 	set_process_input(true)
 	set_physics_process(true)

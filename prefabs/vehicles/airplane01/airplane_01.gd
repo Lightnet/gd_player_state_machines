@@ -1,4 +1,5 @@
-extends VehicleBody3D
+#extends VehicleBody3D
+extends PawnVehicle
 # https://www.youtube.com/watch?v=7URoi0fSpnc
 
 @onready var fr_wheel: VehicleWheel3D = $FR_Wheel
@@ -7,17 +8,24 @@ extends VehicleBody3D
 
 var horse_power  = 240
 var accel_speed = 40
-
 var steer_angle = deg_to_rad(30)
-
 var steer_speed = 3
-
 var brake_power = 40
 var brake_speed = 40
-
 var grounded = false
 
+func _unhandled_input(event: InputEvent) -> void:
+	#print("car...")
+	if not is_controller:
+		return
+	#print("player:" , player)
+	if is_controller == true and event.is_action_pressed("interact") and is_exit == true and player:
+		print("vehicle exit")
+		vehicle_exit()
+
 func _physics_process(delta):
+	if not is_controller:
+		return
 	var throt_input = Input.get_action_strength("forward")+Input.get_action_strength("backward")
 	engine_force = lerp(engine_force, throt_input*horse_power,accel_speed*delta )
 	
@@ -28,10 +36,11 @@ func _physics_process(delta):
 	brake = brake_input*brake_power
 
 func _integrate_forces(_state):
+	if not is_controller:
+		return
 	#var speed = transform.basis * linear_velocity
 	var vec = transform.basis.z * linear_velocity
 	var rez_vec = vec.x + vec.y + vec.z
-	
 	
 	if grounded == true && Input.is_action_pressed("shift"):
 		#if transform.basis.xform_inv(linear_velocity).z <= -8:

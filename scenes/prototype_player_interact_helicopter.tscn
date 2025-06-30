@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dqhtgigyy4b68"]
+[gd_scene load_steps=11 format=3 uid="uid://chxq0h7lvrf4t"]
 
-[ext_resource type="Texture2D" uid="uid://dihkml6628xmu" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_gkhi4"]
-[ext_resource type="Script" uid="uid://cmod3uchr1fx0" path="res://scripts/vehicles/vehicle_mph.gd" id="2_jwmev"]
-[ext_resource type="PackedScene" uid="uid://i7h5xi678bli" path="res://prefabs/block_climb/block_climb.tscn" id="4_hi741"]
-[ext_resource type="PackedScene" uid="uid://dsrq4v6pyhb72" path="res://prefabs/vehicles/car/vehicle_car.tscn" id="5_ho7ok"]
+[ext_resource type="Texture2D" uid="uid://dihkml6628xmu" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_eafvs"]
+[ext_resource type="Script" uid="uid://cmod3uchr1fx0" path="res://scripts/vehicles/vehicle_mph.gd" id="2_qj7kb"]
+[ext_resource type="Script" uid="uid://b1sa428u813qx" path="res://prefabs/vehicles/airplane01/draw_airplane_roll.gd" id="3_txe0y"]
+[ext_resource type="PackedScene" uid="uid://i7h5xi678bli" path="res://prefabs/block_climb/block_climb.tscn" id="4_6emdw"]
+[ext_resource type="PackedScene" uid="uid://cdqfbk85c8eg8" path="res://prefabs/vehicles/helicopter01/helicopter01.tscn" id="5_ei6pd"]
+[ext_resource type="PackedScene" uid="uid://mvfpjdjmgvyl" path="res://prefabs/player/player.tscn" id="6_qj7kb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jvrg6"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -18,11 +20,8 @@ sky = SubResource("Sky_l47rc")
 tonemap_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jvrg6"]
-albedo_texture = ExtResource("1_gkhi4")
+albedo_texture = ExtResource("1_eafvs")
 uv1_triplanar = true
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_y3qgi"]
-friction = 0.46
 
 [node name="PrototypeState" type="Node3D"]
 
@@ -38,7 +37,7 @@ use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-size = Vector3(128, 1, 128)
+size = Vector3(256, 1, 256)
 material = SubResource("StandardMaterial3D_jvrg6")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -65,9 +64,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_jwmev")
+script = ExtResource("2_qj7kb")
 label_mph = NodePath("Label_MPH")
-vehicle_body_3d = NodePath("../../VehicleBody3D")
+vehicle_body_3d = NodePath("../../Helicopter01")
 
 [node name="Label" type="Label" parent="CanvasLayer/Control"]
 layout_mode = 0
@@ -100,17 +99,79 @@ offset_bottom = 72.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 82.0
-offset_right = 258.0
-offset_bottom = 343.0
-text = "A,D = turn
-W,S = forward and backward
-Space = brake"
+offset_left = 16.0
+offset_top = 156.0
+offset_right = 225.0
+offset_bottom = 356.0
+text = "Ground:
+A+Space = UP
+S+Space = Down
+W,A,S,D = move around
+Flying:
+W = Lean foward
+S = lean Backward
+A,D = roll"
 
-[node name="block_climb" parent="." instance=ExtResource("4_hi741")]
+[node name="Label2" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 74.0
+offset_right = 105.0
+offset_bottom = 97.0
+text = "Speed"
+
+[node name="aiplane_roll_draw" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("vehicle", "meter_needle")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 126.0
+offset_top = 1.0
+offset_right = 166.0
+offset_bottom = 41.0
+script = ExtResource("3_txe0y")
+vehicle = NodePath("../../Helicopter01")
+meter_needle = NodePath("RollNeedle")
+
+[node name="SpeedometerNeedleBackGround" type="ColorRect" parent="CanvasLayer/aiplane_roll_draw"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 34.0
+offset_right = 124.0
+offset_bottom = 107.0
+color = Color(0.226707, 0.226707, 0.226707, 1)
+
+[node name="RollNeedle" type="ColorRect" parent="CanvasLayer/aiplane_roll_draw"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 29.0
+offset_top = 50.0
+offset_right = 99.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(35, 0)
+
+[node name="Label" type="Label" parent="CanvasLayer/aiplane_roll_draw"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 109.0
+offset_right = 105.0
+offset_bottom = 132.0
+text = "Roll"
+
+[node name="block_climb" parent="." instance=ExtResource("4_6emdw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.5, -3)
 
-[node name="VehicleBody3D" parent="." instance=ExtResource("5_ho7ok")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23243, -4.82926)
-physics_material_override = SubResource("PhysicsMaterial_y3qgi")
+[node name="Helicopter01" parent="." instance=ExtResource("5_ei6pd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.269812, 0.65669, 0.858251)
+
+[node name="Player" parent="." instance=ExtResource("6_qj7kb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99066, 0.5, 3.23049)
+
+[node name="Camera3D" parent="Player/Neck" index="0"]
+current = true
+
+[editable path="Player"]

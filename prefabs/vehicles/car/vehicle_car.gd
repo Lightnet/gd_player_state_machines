@@ -1,14 +1,15 @@
-extends VehicleBody3D
-
+#extends VehicleBody3D
+extends PawnVehicle
 class_name VehicleController
-@onready var camera: Camera3D = $Camera3D
-@export var exit_point: Node3D
-@onready var exit_time: Timer = $exit_time
+
+#@onready var camera: Camera3D = $Camera3D
+#@export var exit_point: Node3D
+#@onready var exit_time: Timer = $exit_time
 
 # store player
-var player
-@export var IS_CONTROLLER:bool = false
-var is_exit:bool = false
+#var player
+#@export var IS_CONTROLLER:bool = false
+#var is_exit:bool = false
 
 # Configuration variables
 var max_engine_force: float = 200.0
@@ -41,21 +42,21 @@ func _ready() -> void:
 			#print("Script Variable: ", property.name)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not IS_CONTROLLER:
+	#print("car...")
+	if not is_controller:
 		return
-	if event.is_action_pressed("interact") and is_exit == true and not player:
+	#print("player:" , player)
+	if is_controller == true and event.is_action_pressed("interact") and is_exit == true and player:
 		print("car exit")
-		IS_CONTROLLER = false
-		#player.enable_controller()
-		#player.visible = true
-		#player.set_process_input(true)
-		player.exit_vehicle_show()
-		player.global_position = exit_point.global_position
-		player=null
+		#is_controller = false
+		#player.exit_vehicle_show()
+		#player.global_position = exit_point.global_position
+		#player=null
+		vehicle_exit()
 
 func _physics_process(delta: float) -> void:
 	
-	if not IS_CONTROLLER:
+	if not is_controller:
 		return
 		
 	_handle_input(delta)
@@ -68,7 +69,7 @@ func _physics_process(delta: float) -> void:
 
 func _handle_input(delta: float) -> void:
 	
-	if not IS_CONTROLLER:
+	if not is_controller:
 		return
 		
 	# Steering
@@ -105,53 +106,36 @@ func _apply_forces() -> void:
 	wheel_rear_left.brake = current_brake_force
 	wheel_rear_right.brake = current_brake_force
 
-func player_interact(current_player=null) -> void:
-	print("car current_player: ",current_player)
-	
-	if not current_player:
-		return
-	
-	print("IS_CONTROLLER: ",current_player.get("IS_CONTROLLER"))
-	
-	#if current_player.get("IS_CONTROLLER"):
-	#if does_variable_exist(current_player, "IS_CONTROLLER"):
-	if current_player.has_method("disable_controller"):
-		print("Found IS_CONTROLLER")
-		#current_player.disable_controller()
-		#current_player.set_process(false)
-		#current_player.visible = false
-		#current_player.set_process_input(false)
-		player=current_player
-		player.enter_vehicle_hide()
-		
-		enable_controller()
-		exit_time.start()
-		is_exit = false
-		#pass
-	else:
-		print("NO IS_CONTROLLER")
-	pass
+#func player_interact(current_player=null) -> void:
+	#print("car current_player: ",current_player)
+	#if not current_player:
+		#return
+	#print("is_controller: ",current_player.get("is_controller"))
+	#
+	#if current_player.has_method("disable_controller"):
+		#print("Found is_controller")
+		#vehicle_enter(current_player)
+	#else:
+		#print("NO IS_CONTROLLER")
+	#pass
 #
-func does_variable_exist(_node,var_name: String) -> bool:
-	#var my_script = self.get_script()
-	#var property_list = my_script.get_property_list()
-	var property_list = _node.get_property_list()
+#func does_variable_exist(_node,var_name: String) -> bool:
+	##var my_script = self.get_script()
+	##var property_list = my_script.get_property_list()
+	#var property_list = _node.get_property_list()
+	#for property in property_list:
+		#if property.name == var_name and property.usage & PROPERTY_USAGE_SCRIPT_VARIABLE:
+			#return true
+	#return false
 	
-	for property in property_list:
-		if property.name == var_name and property.usage & PROPERTY_USAGE_SCRIPT_VARIABLE:
-			return true
-	return false
-	
-func disable_controller()->void:
-	IS_CONTROLLER = false
-	#camera.dis
+#func disable_controller()->void:
+	#is_controller = false
 	#pass
 	
-func enable_controller()->void:
-	IS_CONTROLLER = true
-	camera.make_current()
+#func enable_controller()->void:
+	#is_controller = true
+	#camera.make_current()
 
-func _on_exit_time_timeout() -> void:
-	print("exit ready...")
-	is_exit = true
-	#pass
+#func _on_exit_time_timeout() -> void:
+	#print("exit ready...")
+	#is_exit = true

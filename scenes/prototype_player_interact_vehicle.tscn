@@ -1,9 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://dqhtgigyy4b68"]
+[gd_scene load_steps=16 format=3 uid="uid://qdrwwth8rdej"]
 
-[ext_resource type="Texture2D" uid="uid://dihkml6628xmu" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_gkhi4"]
-[ext_resource type="Script" uid="uid://cmod3uchr1fx0" path="res://scripts/vehicles/vehicle_mph.gd" id="2_jwmev"]
-[ext_resource type="PackedScene" uid="uid://i7h5xi678bli" path="res://prefabs/block_climb/block_climb.tscn" id="4_hi741"]
-[ext_resource type="PackedScene" uid="uid://dsrq4v6pyhb72" path="res://prefabs/vehicles/car/vehicle_car.tscn" id="5_ho7ok"]
+[ext_resource type="Texture2D" uid="uid://dihkml6628xmu" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_6l6mg"]
+[ext_resource type="Script" uid="uid://cmod3uchr1fx0" path="res://scripts/vehicles/vehicle_mph.gd" id="2_bk0qy"]
+[ext_resource type="PackedScene" uid="uid://i7h5xi678bli" path="res://prefabs/block_climb/block_climb.tscn" id="3_8yofh"]
+[ext_resource type="PackedScene" uid="uid://dsrq4v6pyhb72" path="res://prefabs/vehicles/car/vehicle_car.tscn" id="4_ecly0"]
+[ext_resource type="PackedScene" uid="uid://mvfpjdjmgvyl" path="res://prefabs/player/player.tscn" id="5_bk0qy"]
+[ext_resource type="Script" uid="uid://br7shwa55u1ek" path="res://inventory/inventory_data.gd" id="6_ewduw"]
+[ext_resource type="Script" uid="uid://h1s642kf3ghg" path="res://inventory/slot_data.gd" id="7_uhii8"]
+[ext_resource type="Script" uid="uid://bk2fww1emg1l0" path="res://inventory/inventory_data_equip.gd" id="8_14ps7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jvrg6"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -18,11 +22,21 @@ sky = SubResource("Sky_l47rc")
 tonemap_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jvrg6"]
-albedo_texture = ExtResource("1_gkhi4")
+albedo_texture = ExtResource("1_6l6mg")
 uv1_triplanar = true
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_y3qgi"]
 friction = 0.46
+
+[sub_resource type="Resource" id="Resource_esuig"]
+script = ExtResource("6_ewduw")
+slot_datas = Array[ExtResource("7_uhii8")]([null, null, null])
+metadata/_custom_type_script = "uid://br7shwa55u1ek"
+
+[sub_resource type="Resource" id="Resource_6jx8u"]
+script = ExtResource("8_14ps7")
+slot_datas = Array[ExtResource("7_uhii8")]([])
+metadata/_custom_type_script = "uid://bk2fww1emg1l0"
 
 [node name="PrototypeState" type="Node3D"]
 
@@ -65,7 +79,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_jwmev")
+script = ExtResource("2_bk0qy")
 label_mph = NodePath("Label_MPH")
 vehicle_body_3d = NodePath("../../VehicleBody3D")
 
@@ -108,9 +122,19 @@ text = "A,D = turn
 W,S = forward and backward
 Space = brake"
 
-[node name="block_climb" parent="." instance=ExtResource("4_hi741")]
+[node name="block_climb" parent="." instance=ExtResource("3_8yofh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.5, -3)
 
-[node name="VehicleBody3D" parent="." instance=ExtResource("5_ho7ok")]
+[node name="VehicleBody3D" parent="." instance=ExtResource("4_ecly0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23243, -4.82926)
 physics_material_override = SubResource("PhysicsMaterial_y3qgi")
+
+[node name="Player" parent="." instance=ExtResource("5_bk0qy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4689, 0.5, 1.66388)
+inventory_data = SubResource("Resource_esuig")
+equip_inventory_data = SubResource("Resource_6jx8u")
+
+[node name="Camera3D" parent="Player/Neck" index="0"]
+current = true
+
+[editable path="Player"]

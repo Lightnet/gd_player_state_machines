@@ -22,9 +22,12 @@ height = 0.2
 [sub_resource type="BoxMesh" id="BoxMesh_dknsh"]
 size = Vector3(0.2, 2, 0.1)
 
-[node name="Airplane" type="VehicleBody3D" node_paths=PackedStringArray("propellor")]
+[node name="Airplane" type="VehicleBody3D" node_paths=PackedStringArray("propellor", "camera", "exit_timer", "exit_point")]
 script = ExtResource("1_x1j3d")
 propellor = NodePath("Fan")
+camera = NodePath("Node3D/SpringArm3D/Camera3D")
+exit_timer = NodePath("Exit_Timer")
+exit_point = NodePath("ExitPoint")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_bdtkb")
@@ -101,3 +104,8 @@ skeleton = NodePath("../..")
 [node name="Fan" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.89705)
 mesh = SubResource("BoxMesh_dknsh")
+
+[node name="ExitPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.780131, 0, 1.27378)
+
+[node name="Exit_Timer" type="Timer" parent="."]

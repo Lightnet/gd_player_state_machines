@@ -18,7 +18,7 @@ size = Vector3(0.5, 0.5, 2)
 [sub_resource type="CylinderMesh" id="CylinderMesh_rs7ck"]
 height = 0.5
 
-[node name="Helicopter01" type="VehicleBody3D"]
+[node name="Helicopter" type="VehicleBody3D" node_paths=PackedStringArray("camera", "exit_timer", "exit_point")]
 mass = 160.0
 script = ExtResource("1_pttad")
 main_propellor_path = NodePath("Top_fan")
@@ -26,6 +26,9 @@ back_propellor_path = NodePath("Rear_fan")
 right_wheel_path = NodePath("RearRightWheel")
 left_wheel_path = NodePath("RearLeftWheel")
 front_wheel_path = NodePath("FrontWheel")
+camera = NodePath("Camera_Pivot/SpringArm3D/Camera3D")
+exit_timer = NodePath("ExitTimer")
+exit_point = NodePath("ExitPoint")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_rs7ck")
@@ -83,3 +86,8 @@ spring_length = 5.0
 
 [node name="Camera3D" type="Camera3D" parent="Camera_Pivot/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.85196)
+
+[node name="ExitTimer" type="Timer" parent="."]
+
+[node name="ExitPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.77431, 0, 1.79907)

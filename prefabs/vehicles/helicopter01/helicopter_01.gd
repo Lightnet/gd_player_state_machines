@@ -1,6 +1,6 @@
 # https://www.youtube.com/watch?v=KXhwSLqEYAI
-extends VehicleBody3D
-
+#extends VehicleBody3D
+extends PawnVehicle
 @export var horse_power  = 50
 @export var accel_speed = 10
 
@@ -26,7 +26,18 @@ var grounded = false
 @onready var left_wheel = get_node(left_wheel_path)
 @onready var front_wheel = get_node(front_wheel_path)
 
+func _unhandled_input(event: InputEvent) -> void:
+	#print("car...")
+	if not is_controller:
+		return
+	#print("player:" , player)
+	if is_controller == true and event.is_action_pressed("interact") and is_exit == true and player:
+		print("vehicle exit")
+		vehicle_exit()
+
 func _physics_process(delta):
+	if not is_controller:
+		return
 	var throt_input = Input.get_action_strength("forward")+Input.get_action_strength("backward")
 	engine_force = lerp(engine_force, throt_input*horse_power,accel_speed*delta )
 	
@@ -37,7 +48,8 @@ func _physics_process(delta):
 	brake = lerp(brake, brake_input*brake_power, brake_speed*delta)
 	
 func _integrate_forces(_state):
-	
+	if not is_controller:
+		return
 	#inputs
 	var ver_input = -Input.get_action_strength("forward")+Input.get_action_strength("backward")
 	var hor_input = -Input.get_action_strength("left")+Input.get_action_strength("right")
