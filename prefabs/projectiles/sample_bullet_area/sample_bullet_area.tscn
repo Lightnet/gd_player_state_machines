@@ -1,6 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnsym8dlkyeec"]
+[gd_scene load_steps=7 format=3 uid="uid://bnsym8dlkyeec"]
 
 [ext_resource type="Script" uid="uid://b82e1ls6jqy6a" path="res://prefabs/projectiles/sample_bullet_area/sample_bullet_area.gd" id="1_nhf2r"]
+[ext_resource type="Script" uid="uid://dkkimfebku13k" path="res://scripts/hit_info/hit_info_data.gd" id="2_1spio"]
+
+[sub_resource type="Resource" id="Resource_1spio"]
+script = ExtResource("2_1spio")
+name = "Damage"
+amount_point = 1.0
+type = "Physical"
+metadata/_custom_type_script = "uid://dkkimfebku13k"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mtkpt"]
 size = Vector3(0.1, 0.1, 0.1)
@@ -14,6 +22,7 @@ size = Vector3(0.1, 0.1, 0.1)
 
 [node name="sample_bullet_area" type="Area3D"]
 script = ExtResource("1_nhf2r")
+hit_info = SubResource("Resource_1spio")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_mtkpt")

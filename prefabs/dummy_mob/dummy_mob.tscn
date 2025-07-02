@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3 uid="uid://pp7v4wavcp11"]
+
+[ext_resource type="Script" uid="uid://dtbjwjmyvmuq6" path="res://prefabs/dummy_mob/dummy_mob.gd" id="1_7nqf1"]
+[ext_resource type="Script" uid="uid://d4f7n2fpvxghr" path="res://scripts/player/stats_display_health.gd" id="2_k13mg"]
+[ext_resource type="Script" uid="uid://buheo0yw6ymk2" path="res://prefabs/dummy_mob/sprite_3d_camera_face.gd" id="2_tc8cr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ev4f4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7nqf1"]
+albedo_color = Color(0.98, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_k13mg"]
+material = SubResource("StandardMaterial3D_7nqf1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tc8cr"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mns0v"]
+material = SubResource("StandardMaterial3D_tc8cr")
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_k13mg"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[node name="DummyMob" type="CharacterBody3D"]
+script = ExtResource("1_7nqf1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_ev4f4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_k13mg")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.317424, -0.411615)
+mesh = SubResource("BoxMesh_mns0v")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27574, 0)
+texture = SubResource("ViewportTexture_k13mg")
+script = ExtResource("2_tc8cr")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+transparent_bg = true
+size = Vector2i(256, 30)
+
+[node name="CenterContainer" type="CenterContainer" parent="Sprite3D/SubViewport"]
+offset_right = 256.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Sprite3D/SubViewport/CenterContainer" node_paths=PackedStringArray("player", "label_health", "label_health_max")]
+layout_mode = 2
+script = ExtResource("2_k13mg")
+player = NodePath("../../../..")
+label_health = NodePath("Label_Health")
+label_health_max = NodePath("Label_Health_Max")
+
+[node name="Label" type="Label" parent="Sprite3D/SubViewport/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "Health:"
+
+[node name="Label_Health" type="Label" parent="Sprite3D/SubViewport/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="Label3" type="Label" parent="Sprite3D/SubViewport/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "/"
+
+[node name="Label_Health_Max" type="Label" parent="Sprite3D/SubViewport/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"

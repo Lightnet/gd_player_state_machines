@@ -3,16 +3,14 @@ extends StaticBody3D
 func _ready() -> void:
 	pass
 
-func _process(delta: float) -> void:
-	pass
-
+#func _process(delta: float) -> void:
+	#pass
 
 func _on_area_3d_area_entered(area: Area3D) -> void:
 	print("area:",area )
 	pass 
 
-
-func _on_area_3d_area_exited(area: Area3D) -> void:
+func _on_area_3d_area_exited(_area: Area3D) -> void:
 	pass 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:

@@ -49,8 +49,8 @@ func console_summon(param:String, param2:String ):
 	else:
 		print("Item with name '%s' not found." % item_name)
 
-func does_item_name_exist(folder_path: String, item_name: String) -> bool:
-	var dir = DirAccess.open(folder_path)
+func does_item_name_exist(dir_folder_path: String, item_name: String) -> bool:
+	var dir = DirAccess.open(dir_folder_path)
 	if dir:
 		# Normalize input item_name: lowercase and replace spaces with underscores
 		var normalized_item_name = item_name.to_lower().replace(" ", "_")
@@ -58,7 +58,7 @@ func does_item_name_exist(folder_path: String, item_name: String) -> bool:
 		var file_name = dir.get_next()
 		while file_name != "":
 			if file_name.ends_with(".tres"):
-				var full_path = folder_path + "/" + file_name
+				var full_path = dir_folder_path + "/" + file_name
 				var resource = load(full_path) as ItemData
 				if resource:
 					# Normalize resource name for comparison
@@ -69,8 +69,8 @@ func does_item_name_exist(folder_path: String, item_name: String) -> bool:
 		dir.list_dir_end()
 	return false
 	
-func get_item_data_by_name(folder_path: String, item_name: String) -> ItemData:
-	var dir = DirAccess.open(folder_path)
+func get_item_data_by_name(dir_folder_path: String, item_name: String) -> ItemData:
+	var dir = DirAccess.open(dir_folder_path)
 	if dir:
 		# Normalize input item_name: lowercase and replace spaces with underscores
 		var normalized_item_name = item_name.to_lower().replace(" ", "_")
@@ -78,7 +78,7 @@ func get_item_data_by_name(folder_path: String, item_name: String) -> ItemData:
 		var file_name = dir.get_next()
 		while file_name != "":
 			if file_name.ends_with(".tres"):
-				var full_path = folder_path + "/" + file_name
+				var full_path = dir_folder_path + "/" + file_name
 				var resource = load(full_path) as ItemData
 				if resource:
 					# Normalize resource name for comparison

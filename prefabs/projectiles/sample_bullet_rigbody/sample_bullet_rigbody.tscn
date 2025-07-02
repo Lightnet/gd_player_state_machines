@@ -1,6 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8lyjlubit36h"]
+[gd_scene load_steps=7 format=3 uid="uid://b8lyjlubit36h"]
 
 [ext_resource type="Script" uid="uid://dus2o38wbhj0o" path="res://prefabs/projectiles/sample_bullet_rigbody/sample_bullet_rigbody.gd" id="1_j6cjk"]
+[ext_resource type="Script" uid="uid://dkkimfebku13k" path="res://scripts/hit_info/hit_info_data.gd" id="2_vsf1e"]
+
+[sub_resource type="Resource" id="Resource_buk38"]
+script = ExtResource("2_vsf1e")
+name = "None"
+amount_point = 1.0
+type = "Physical"
+metadata/_custom_type_script = "uid://dkkimfebku13k"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mtkpt"]
 size = Vector3(0.1, 0.1, 0.1)
@@ -18,6 +26,7 @@ continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_j6cjk")
+hit_info = SubResource("Resource_buk38")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_mtkpt")
@@ -27,4 +36,5 @@ mesh = SubResource("BoxMesh_8wrd8")
 
 [node name="Timer" type="Timer" parent="."]
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

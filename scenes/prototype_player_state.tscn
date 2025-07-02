@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bnkmiak55l2fn"]
+[gd_scene load_steps=36 format=3 uid="uid://bnkmiak55l2fn"]
 
 [ext_resource type="Texture2D" uid="uid://dihkml6628xmu" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_1crot"]
 [ext_resource type="PackedScene" uid="uid://mvfpjdjmgvyl" path="res://prefabs/player/player.tscn" id="1_r5ocr"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://feu447it4i6g" path="res://prefabs/damage_area/damage_area_3d.tscn" id="20_r4pdi"]
 [ext_resource type="Script" uid="uid://dkkimfebku13k" path="res://scripts/hit_info/hit_info_data.gd" id="22_dmcie"]
 [ext_resource type="PackedScene" uid="uid://bqrewyr152xxg" path="res://prefabs/heal_area/heal_area_3d.tscn" id="22_gah8l"]
+[ext_resource type="PackedScene" uid="uid://pp7v4wavcp11" path="res://prefabs/dummy_mob/dummy_mob.tscn" id="24_uwv03"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jvrg6"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -99,7 +100,7 @@ shadow_enabled = true
 environment = SubResource("Environment_bqab6")
 
 [node name="Player" parent="." instance=ExtResource("1_r5ocr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.19905, 0.55504, 8.36856)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.40007, 0.55504, 8.36856)
 inventory_data = SubResource("Resource_gfsir")
 equip_inventory_data = SubResource("Resource_nrvgq")
 stats = SubResource("Resource_sap80")
@@ -299,5 +300,8 @@ hit_info = SubResource("Resource_dmcie")
 [node name="HealArea3D" parent="." instance=ExtResource("22_gah8l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.91559, -2.38419e-07, 3.73003)
 hit_info = SubResource("Resource_uwv03")
+
+[node name="DummyMob" parent="." instance=ExtResource("24_uwv03")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2758, 0.5215, 5.01069)
 
 [editable path="UI"]

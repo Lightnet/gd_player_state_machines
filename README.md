@@ -135,6 +135,8 @@ The system will support vehicle interactions, including:
 	- [x] equip ui (simple test)
 	- [x] chest ui
 - [ ] creature
+	- [x] Dummy Mob Health
+	- [ ] 
 
 ## health and damage:
   There is stats(Health) and HitInfoData type. Simple test build for damage and heal test.
