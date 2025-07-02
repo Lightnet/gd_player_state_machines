@@ -1,6 +1,14 @@
 class_name Player extends CharacterBody3D
 
+# Signals
 signal toggle_inventory()
+signal hit_received(hit_info: HitInfoData)  # Emitted when entity is hit (damage or healing)
+signal health_changed(new_health: int, old_health: int)  # Emitted when health changes
+signal died()  # Emitted when health reaches zero
+
+# invincible 
+# invulnerable
+@export var is_invulnerable:bool = false
 
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
@@ -217,7 +225,13 @@ func console_walk():
 	#pass
 	
 func console_god():
-	pass
+	#is_invulnerable=true
+	is_invulnerable = not is_invulnerable
+	if is_invulnerable:
+		Console.print_line("GOD MODE: ON")
+	else:
+		Console.print_line("GOD MODE: OFF")
+	#pass
 
 func disable_controller()->void:
 	is_controller = false
@@ -262,17 +276,37 @@ func set_wall_normal(norm:Vector3):
 #func get_wall_normal() -> Vector3:
 	#return wall_normal
 
-func on_damage(dmg_type:DamageData):
+func _on_hit_received(hit_info:HitInfoData):
+	if is_invulnerable:
+		return
+		
 	if stats:
-		if dmg_type.type == "Heal":
-			stats.health += dmg_type.damage
+		var old_health: float = stats.health
+		if hit_info.type == "Heal":
+			stats.health += hit_info.amount_point
 			if stats.health > stats.health_max:
 				stats.health = stats.health_max
 			return
-		stats.health -= dmg_type.damage
+		stats.health -= hit_info.amount_point
 		print("stats.health: ", stats.health)
-		
 		if stats.health < 0:
 			stats.health = 0
+			emit_signal("died")
+		var current_health_points: float = stats.health
+		emit_signal("health_changed", current_health_points, old_health)
+		
+
+#func on_damage(dmg_type:DamageData):
+	#if stats:
+		#if dmg_type.type == "Heal":
+			#stats.health += dmg_type.damage
+			#if stats.health > stats.health_max:
+				#stats.health = stats.health_max
+			#return
+		#stats.health -= dmg_type.damage
+		#print("stats.health: ", stats.health)
+		#
+		#if stats.health < 0:
+			#stats.health = 0
 		#pass
 	#pass

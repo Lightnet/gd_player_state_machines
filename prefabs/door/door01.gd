@@ -20,10 +20,10 @@ func player_interact(current_player=null) -> void:
 		animation_player.play("open")
 	print("is_open:", is_open)
 
-func on_finish_animation(name:String):
-	print("name:", name)
-	if name == "open":
+func on_finish_animation(animation_name:String):
+	print("name:", animation_name)
+	if animation_name == "open":
 		animation_player.play("open_idle")
-	if name == "close":
+	if animation_name == "close":
 		animation_player.play("close_idle")
 	pass

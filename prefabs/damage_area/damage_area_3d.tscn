@@ -1,14 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://feu447it4i6g"]
+[gd_scene load_steps=6 format=3 uid="uid://feu447it4i6g"]
 
 [ext_resource type="Script" uid="uid://mfm68rj2xeaa" path="res://prefabs/damage_area/damage_area_3d.gd" id="1_wkv1w"]
-[ext_resource type="Script" uid="uid://dw6ja50evrxwv" path="res://scripts/damage/damage_data.gd" id="2_swkn8"]
-
-[sub_resource type="Resource" id="Resource_g6pst"]
-script = ExtResource("2_swkn8")
-name = "None"
-damage = 1.0
-type = "Physical"
-metadata/_custom_type_script = "uid://dw6ja50evrxwv"
+[ext_resource type="PackedScene" uid="uid://we4b7eu6lq56" path="res://prefabs/text3d/text_3d.tscn" id="2_swkn8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_to7hs"]
 
@@ -23,7 +16,6 @@ material = SubResource("StandardMaterial3D_nme3l")
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_wkv1w")
-damage_type = SubResource("Resource_g6pst")
 timer = NodePath("Timer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -33,6 +25,10 @@ shape = SubResource("BoxShape3D_to7hs")
 mesh = SubResource("BoxMesh_r4pdi")
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="Text3D" parent="." instance=ExtResource("2_swkn8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0074, -2.2086, 0)
+text = "Damage"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

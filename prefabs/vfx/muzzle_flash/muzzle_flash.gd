@@ -17,8 +17,8 @@ func _ready() -> void:
 	pause_timer.timeout.connect(_on_pause_timer_timeout)
 	pass
 
-func _process(delta: float) -> void:
-	pass
+#func _process(delta: float) -> void:
+	#pass
 	
 func trigger_fire():
 	# Start emitting all particles

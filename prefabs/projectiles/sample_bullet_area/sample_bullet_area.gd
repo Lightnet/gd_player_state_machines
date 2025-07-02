@@ -19,7 +19,7 @@ func _on_timer_timeout() -> void:
 	queue_free()
 	pass
 
-func _on_body_entered(body: Node3D) -> void:
+func _on_body_entered(_body: Node3D) -> void:
 	#if body.is_in_group("enemies"):
 		## Apply damage (assumes enemy has a take_damage method)
 		#if body.has_method("take_damage"):

@@ -1,7 +1,9 @@
 extends Area3D
-# damage tick
-@export var damage_type:DamageData
 
+@export var hit_info:HitInfoData
+#@export var damage_type:DamageData
+
+# damage tick
 @export var timer:Timer
 var bodies:Array
 var is_damage_on:bool = false
@@ -15,15 +17,15 @@ func _process(delta: float) -> void:
 	
 	tick_counter += delta
 	#print("tick_counter: ", tick_counter)
-	
 	if tick_counter >= 1:
 		tick_counter = 0
 		#print("tick")
-		
 		if len(bodies) > 0:
 			for body in bodies:
-				if body.has_method("on_damage"):
-					body.on_damage(damage_type)
+				if body.has_method("_on_hit_received"):
+					body._on_hit_received(hit_info)
+				#if body.has_method("on_damage"):
+					#body.on_damage(damage_type)
 					#pass
 				#print("test damage body")
 				#pass

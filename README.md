@@ -122,6 +122,9 @@ The system will support vehicle interactions, including:
 		- [x] generate tracks (testing / not use physics)
 		- [ ] path track mesh
 	- [ ] boat
+- [ ] debug
+	- [x] Damage Area
+	- [x] Heal Area
 - [x] Ladder (area3d simple)
 - [ ] Edge Climb
 - [x] door (simple)
@@ -132,6 +135,36 @@ The system will support vehicle interactions, including:
 	- [x] equip ui (simple test)
 	- [x] chest ui
 - [ ] creature
+
+## health and damage:
+  There is stats(Health) and HitInfoData type. Simple test build for damage and heal test.
+
+### stats_data.gd
+```
+extends Resource
+class_name StatsData
+
+@export var health:float = 100
+@export var health_max:float = 100
+```
+### hit_info_data.gd
+```
+extends Resource
+class_name HitInfoData
+
+@export var amount_point:float = 1.0
+@export var type:String = "Physical" #Type: Physical, damage, heal, buff, debuff
+var current_owner_name:String = "None" 
+var current_owner:Node3D #owner
+```
+	Need to killed by Node3D or Name by default.
+
+### player.gd:
+  api function
+```
+func _on_hit_received(hit_info:HitInfoData):
+	pass
+```
 
 # Design:
 	Working on the player state and interacting item, vehicle, mount, ladder and so on for testing.
@@ -159,7 +192,7 @@ The system will support vehicle interactions, including:
 	- [x] ghost =  disable collision (n/a)
 	- [x] walk = normal physics set
 	- [x] fly
-	- [ ] god (no damage / N/A)
+	- [x] god
 	- [x] summon item_name item_count
 	- [ ] addbots N/A
 	- [ ] killbots N/A
