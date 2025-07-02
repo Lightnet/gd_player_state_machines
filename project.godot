@@ -12,7 +12,7 @@ config_version=5
 
 config/name="player_state_machines"
 config/tags=PackedStringArray("3d", "character", "experiment", "inventory", "prototype", "starterkit", "subviewport", "vehicle")
-run/main_scene="uid://chxq0h7lvrf4t"
+run/main_scene="uid://bnkmiak55l2fn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 

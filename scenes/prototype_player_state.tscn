@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bnkmiak55l2fn"]
+[gd_scene load_steps=34 format=3 uid="uid://bnkmiak55l2fn"]
 
 [ext_resource type="Texture2D" uid="uid://dihkml6628xmu" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_1crot"]
 [ext_resource type="PackedScene" uid="uid://mvfpjdjmgvyl" path="res://prefabs/player/player.tscn" id="1_r5ocr"]
@@ -10,15 +10,19 @@
 [ext_resource type="Script" uid="uid://b4dxjfku8hkmx" path="res://scripts/ui/reticle.gd" id="4_l47rc"]
 [ext_resource type="PackedScene" uid="uid://i7h5xi678bli" path="res://prefabs/block_climb/block_climb.tscn" id="5_l47rc"]
 [ext_resource type="PackedScene" uid="uid://cxb811o6q4mb" path="res://inventory/ui_inventory.tscn" id="6_qkiq4"]
+[ext_resource type="Script" uid="uid://br5w01sghbbat" path="res://scripts/entity/stats_data.gd" id="6_r4pdi"]
 [ext_resource type="Script" uid="uid://btlc7ox1h6jvx" path="res://scripts/player_inventory_management.gd" id="7_a0i2y"]
 [ext_resource type="PackedScene" uid="uid://jg1qx3d4mn2t" path="res://prefabs/door/door.tscn" id="7_nrvgq"]
 [ext_resource type="PackedScene" uid="uid://cn07gtp8s53bo" path="res://prefabs/ladder/ladder.tscn" id="10_kyd4g"]
 [ext_resource type="PackedScene" uid="uid://4m2atmckibph" path="res://prefabs/chest_inventory/chest_inventory.tscn" id="12_7pkjl"]
+[ext_resource type="Script" uid="uid://d4f7n2fpvxghr" path="res://scripts/player/stats_display_health.gd" id="12_sap80"]
 [ext_resource type="PackedScene" uid="uid://ra47vbksjn8y" path="res://item/pickUp/pick_up.tscn" id="13_gfsir"]
 [ext_resource type="PackedScene" uid="uid://de0u3vc30w0q3" path="res://prefabs/button/button.tscn" id="16_0vw2k"]
-[ext_resource type="Script" uid="uid://c66iuh8hccxe4" path="res://scripts/tests/await_time.gd" id="17_ag0r3"]
 [ext_resource type="PackedScene" uid="uid://we4b7eu6lq56" path="res://prefabs/text3d/text_3d.tscn" id="18_mdi6p"]
 [ext_resource type="PackedScene" uid="uid://cucf3sp344qb2" path="res://prefabs/movebody/move_body_3d.tscn" id="19_to7hs"]
+[ext_resource type="PackedScene" uid="uid://feu447it4i6g" path="res://prefabs/damage_area/damage_area_3d.tscn" id="20_r4pdi"]
+[ext_resource type="Script" uid="uid://dw6ja50evrxwv" path="res://scripts/damage/damage_data.gd" id="22_dmcie"]
+[ext_resource type="PackedScene" uid="uid://bqrewyr152xxg" path="res://prefabs/heal_area/heal_area_3d.tscn" id="22_gah8l"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jvrg6"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -48,6 +52,20 @@ script = ExtResource("4_7pkjl")
 slot_datas = Array[ExtResource("3_eiei1")]([null])
 metadata/_custom_type_script = "uid://bk2fww1emg1l0"
 
+[sub_resource type="Resource" id="Resource_sap80"]
+script = ExtResource("6_r4pdi")
+health = 100.0
+health_max = 100.0
+magic = 100.0
+magic_max = 100.0
+attack = 10.0
+defense = 10.0
+magic_attack = 100.0
+magic_defense = 100.0
+Experience = 10.0
+Level = 10.0
+metadata/_custom_type_script = "uid://br5w01sghbbat"
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jvrg6"]
 albedo_texture = ExtResource("1_1crot")
 uv1_triplanar = true
@@ -56,6 +74,13 @@ uv1_triplanar = true
 script = ExtResource("2_78bmn")
 slot_datas = Array[ExtResource("3_eiei1")]([null, null, null, null, null, null, null, null, null, null])
 metadata/_custom_type_script = "uid://br7shwa55u1ek"
+
+[sub_resource type="Resource" id="Resource_uwv03"]
+script = ExtResource("22_dmcie")
+name = "Area"
+damage = 10.0
+type = "Physical"
+metadata/_custom_type_script = "uid://dw6ja50evrxwv"
 
 [node name="PrototypeState" type="Node3D"]
 
@@ -67,9 +92,10 @@ shadow_enabled = true
 environment = SubResource("Environment_bqab6")
 
 [node name="Player" parent="." instance=ExtResource("1_r5ocr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0884, 0.55504, -4.35899)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.19905, 0.55504, 8.36856)
 inventory_data = SubResource("Resource_gfsir")
 equip_inventory_data = SubResource("Resource_nrvgq")
+stats = SubResource("Resource_sap80")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 use_collision = true
@@ -156,6 +182,41 @@ transform = Transform3D(-0.11934, 0, 0.992853, 0, 1, 0, -0.992853, 0, -0.11934, 
 [node name="StaticBody3D" parent="CanvasLayer/SubViewportContainer/SubViewport" instance=ExtResource("10_kyd4g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.86647, -0.5, -3.23025)
 
+[node name="Control_Health" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("player", "label_health", "label_health_max")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_sap80")
+player = NodePath("../../Player")
+label_health = NodePath("HBoxContainer/Label_Health")
+label_health_max = NodePath("HBoxContainer/Label_Health_Max")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control_Health"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 28.0
+offset_right = 48.0
+offset_bottom = 68.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control_Health/HBoxContainer"]
+layout_mode = 2
+text = " Health: "
+
+[node name="Label_Health" type="Label" parent="CanvasLayer/Control_Health/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control_Health/HBoxContainer"]
+layout_mode = 2
+text = "/"
+
+[node name="Label_Health_Max" type="Label" parent="CanvasLayer/Control_Health/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
 [node name="block_climb" parent="." instance=ExtResource("5_l47rc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -3)
 
@@ -201,9 +262,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.58996, -0.18, -0.921301)
 [node name="Button" parent="." instance=ExtResource("16_0vw2k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.15811, 0.658733, -1.29509)
 
-[node name="await_test" type="Node3D" parent="."]
-script = ExtResource("17_ag0r3")
-
 [node name="Text3D2" parent="." instance=ExtResource("18_mdi6p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0518, 0.849345, -10.2762)
 text = "Jump 
@@ -226,5 +284,12 @@ Marker edge line
 
 [node name="MoveBody3D" parent="." instance=ExtResource("19_to7hs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+
+[node name="DamageArea3D" parent="." instance=ExtResource("20_r4pdi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.62726, 2.38419e-07, 3.90431)
+damage_type = SubResource("Resource_uwv03")
+
+[node name="HealArea3D" parent="." instance=ExtResource("22_gah8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.91559, -2.38419e-07, 3.73003)
 
 [editable path="UI"]

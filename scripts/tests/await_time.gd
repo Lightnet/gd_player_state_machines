@@ -9,7 +9,7 @@ func _ready() -> void:
 	await get_tree().create_timer(10.0).timeout
 	
 	print("test time2")
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

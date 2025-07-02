@@ -11,6 +11,8 @@ signal toggle_inventory()
 @export var inventory_data:InventoryData
 @export var equip_inventory_data:InventoryDataEquip
 
+@export var stats:StatsData
+
 @export var WALK_SPEED := 5.0
 @export var SPRINT_SPEED = 8.0
 
@@ -259,3 +261,18 @@ func set_wall_normal(norm:Vector3):
 	
 #func get_wall_normal() -> Vector3:
 	#return wall_normal
+
+func on_damage(dmg_type:DamageData):
+	if stats:
+		if dmg_type.type == "Heal":
+			stats.health += dmg_type.damage
+			if stats.health > stats.health_max:
+				stats.health = stats.health_max
+			return
+		stats.health -= dmg_type.damage
+		print("stats.health: ", stats.health)
+		
+		if stats.health < 0:
+			stats.health = 0
+		#pass
+	#pass
