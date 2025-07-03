@@ -141,7 +141,7 @@ The system will support vehicle interactions, including:
 		- [x] lookat (testing)
 		- [x] patrol (testing)
 		- [ ] idle (testing)
-		- [ ] attack
+		- [x] attack (not added, area3d damage test)
 		- [ ] range attack
 		- [ ] death
 		

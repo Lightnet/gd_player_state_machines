@@ -3,7 +3,10 @@ class_name DummyBot
 
 @export var target:Node3D
 var target_position:Vector3
-var is_target_position:bool = false 
+var is_target_position:bool = false
+
+var thinking_mode:String = ""
+
 
 @export var state_machine:StateMachine
 

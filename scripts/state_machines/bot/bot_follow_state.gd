@@ -29,7 +29,7 @@ func physics_update(delta: float) -> void:
 		# Calculate direction to the target point (movement direction)
 		var direction: Vector3 = (target_point - bot_position).normalized()
 		
-		print("distance_to_point: ",distance_to_point,"point_threshold: ", point_threshold)
+		#print("distance_to_point: ",distance_to_point,"point_threshold: ", point_threshold)
 		# Check if close enough to the current point
 		if distance_to_point <= point_threshold:
 			pass

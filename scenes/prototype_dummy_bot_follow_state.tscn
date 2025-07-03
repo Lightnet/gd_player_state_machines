@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b81vfos6ruv18"]
+[gd_scene load_steps=24 format=3 uid="uid://b81vfos6ruv18"]
 
 [ext_resource type="PackedScene" uid="uid://mvfpjdjmgvyl" path="res://prefabs/player/player.tscn" id="1_y56ci"]
 [ext_resource type="Script" uid="uid://br7shwa55u1ek" path="res://inventory/inventory_data.gd" id="2_5aq6f"]
@@ -9,7 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://dihkml6628xmu" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="7_relqu"]
 [ext_resource type="Script" uid="uid://4rgcsyaqbjfm" path="res://scripts/ui/ui_player_state.gd" id="8_0qe53"]
 [ext_resource type="Script" uid="uid://b4dxjfku8hkmx" path="res://scripts/ui/reticle.gd" id="9_5oicb"]
+[ext_resource type="Script" uid="uid://d4f7n2fpvxghr" path="res://scripts/player/stats_display_health.gd" id="10_nxeij"]
 [ext_resource type="PackedScene" uid="uid://cuaecgronun2n" path="res://prefabs/dummy_bot/dummy_bot.tscn" id="10_r21l5"]
+[ext_resource type="Script" uid="uid://dkkimfebku13k" path="res://scripts/hit_info/hit_info_data.gd" id="11_5aq6f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jvrg6"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -59,6 +61,13 @@ uv1_triplanar = true
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_dk5o0"]
 viewport_path = NodePath("DummyBot/Sprite3D/SubViewport")
+
+[sub_resource type="Resource" id="Resource_nxeij"]
+script = ExtResource("11_5aq6f")
+name = "None"
+amount_point = 2.0
+type = "Physical"
+metadata/_custom_type_script = "uid://dkkimfebku13k"
 
 [sub_resource type="Curve3D" id="Curve3D_rw2s5"]
 _data = {
@@ -152,6 +161,41 @@ render_target_update_mode = 4
 [node name="Camera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 transform = Transform3D(-0.11934, 0, 0.992853, 0, 1, 0, -0.992853, 0, -0.11934, 15.4807, 0.23859, -3.31459)
 
+[node name="Control_Health" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("player", "label_health", "label_health_max")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_nxeij")
+player = NodePath("../../Player")
+label_health = NodePath("HBoxContainer/Label_Health")
+label_health_max = NodePath("HBoxContainer/Label_Health_Max")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control_Health"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 28.0
+offset_right = 48.0
+offset_bottom = 68.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control_Health/HBoxContainer"]
+layout_mode = 2
+text = " Health: "
+
+[node name="Label_Health" type="Label" parent="CanvasLayer/Control_Health/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control_Health/HBoxContainer"]
+layout_mode = 2
+text = "/"
+
+[node name="Label_Health_Max" type="Label" parent="CanvasLayer/Control_Health/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
 [node name="DummyBot" parent="." node_paths=PackedStringArray("target", "path") instance=ExtResource("10_r21l5")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.4528, 0.5, -1.33739)
 target = NodePath("../Player")
@@ -162,6 +206,10 @@ texture = SubResource("ViewportTexture_dk5o0")
 
 [node name="StateMachine" parent="DummyBot" index="5" node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Follow")
+
+[node name="Area3D" parent="DummyBot/Hand" index="0" node_paths=PackedStringArray("timer")]
+timer = NodePath("Timer")
+hit_info = SubResource("Resource_nxeij")
 
 [node name="Path3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_rw2s5")

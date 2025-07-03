@@ -57,7 +57,7 @@ func physics_update(delta: float) -> void:
 		# Check if reached the end of the path
 		if current_point_index >= points.size():
 			current_point_index = points.size() - 1  # Clamp to last point
-			finished.emit(self, "IdleState")  # Transition to idle state
+			#finished.emit(self, "IdleState")  # Transition to idle state
 			return
 
 func _look_at_next_point(delta: float) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cuaecgronun2n"]
+[gd_scene load_steps=20 format=3 uid="uid://cuaecgronun2n"]
 
 [ext_resource type="Script" uid="uid://5vx0nowemeyx" path="res://scripts/entity/dummy_bot.gd" id="1_kun2s"]
 [ext_resource type="Script" uid="uid://buheo0yw6ymk2" path="res://prefabs/dummy_mob/sprite_3d_camera_face.gd" id="2_67f07"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bh24qw3m2prc8" path="res://scripts/state_machines/bot/bot_follow_state.gd" id="9_o0r6u"]
 [ext_resource type="Script" uid="uid://d4j1i4y263y5l" path="res://scripts/state_machines/bot/bot_patrol_state.gd" id="10_8qk05"]
 [ext_resource type="Script" uid="uid://bqcslss10ypjp" path="res://scripts/state_machines/bot/bot_lookat_state.gd" id="10_mm4j6"]
+[ext_resource type="Script" uid="uid://d3ucbnr2v1o71" path="res://prefabs/dummy_bot/attack_dummy_area_3d.gd" id="12_mm4j6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ev4f4"]
 
@@ -29,6 +30,8 @@ size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_k13mg"]
 viewport_path = NodePath("Sprite3D/SubViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8qk05"]
 
 [node name="DummyBot" type="CharacterBody3D" node_paths=PackedStringArray("state_machine")]
 script = ExtResource("1_kun2s")
@@ -108,3 +111,21 @@ script = ExtResource("10_mm4j6")
 
 [node name="Patrol" type="Node" parent="StateMachine"]
 script = ExtResource("10_8qk05")
+
+[node name="Hand" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.305437, 0, -0.7217)
+
+[node name="Area3D" type="Area3D" parent="Hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.305437, 0.31793, -0.417239)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("12_mm4j6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hand/Area3D"]
+shape = SubResource("BoxShape3D_8qk05")
+
+[node name="Timer" type="Timer" parent="Hand/Area3D"]
+
+[connection signal="body_entered" from="Hand/Area3D" to="Hand/Area3D" method="_on_body_entered"]
+[connection signal="body_exited" from="Hand/Area3D" to="Hand/Area3D" method="_on_body_exited"]
+[connection signal="timeout" from="Hand/Area3D/Timer" to="Hand/Area3D" method="_on_timer_timeout"]
