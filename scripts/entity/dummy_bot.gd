@@ -1,10 +1,18 @@
 extends CharacterBody3D
-class_name DummyMob
+class_name DummyBot
+
+@export var target:Node3D
+var target_position:Vector3
+var is_target_position:bool = false 
+
+@export var state_machine:StateMachine
 
 signal health_changed(new_health: int, old_health: int)  # Emitted when health changes
 signal died()  # Emitted when health reaches zero
 
 var stats:StatsData
+
+@export var path:Node3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -38,7 +46,6 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-
 func _on_hit_received(hit_info:HitInfoData):
 	
 	if stats:
@@ -56,3 +63,7 @@ func _on_hit_received(hit_info:HitInfoData):
 		var current_health_points: float = stats.health
 		#emit_signal("health_changed", current_health_points, old_health)
 	pass
+
+
+
+#

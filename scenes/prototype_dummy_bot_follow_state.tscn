@@ -1,0 +1,169 @@
+[gd_scene load_steps=21 format=3 uid="uid://b81vfos6ruv18"]
+
+[ext_resource type="PackedScene" uid="uid://mvfpjdjmgvyl" path="res://prefabs/player/player.tscn" id="1_y56ci"]
+[ext_resource type="Script" uid="uid://br7shwa55u1ek" path="res://inventory/inventory_data.gd" id="2_5aq6f"]
+[ext_resource type="Script" uid="uid://h1s642kf3ghg" path="res://inventory/slot_data.gd" id="3_nxeij"]
+[ext_resource type="Resource" uid="uid://cmmi21ih6kcoe" path="res://item/items/apple.tres" id="4_d1xuu"]
+[ext_resource type="Script" uid="uid://bk2fww1emg1l0" path="res://inventory/inventory_data_equip.gd" id="5_krsjd"]
+[ext_resource type="Script" uid="uid://br5w01sghbbat" path="res://scripts/entity/stats_data.gd" id="6_vbeyi"]
+[ext_resource type="Texture2D" uid="uid://dihkml6628xmu" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="7_relqu"]
+[ext_resource type="Script" uid="uid://4rgcsyaqbjfm" path="res://scripts/ui/ui_player_state.gd" id="8_0qe53"]
+[ext_resource type="Script" uid="uid://b4dxjfku8hkmx" path="res://scripts/ui/reticle.gd" id="9_5oicb"]
+[ext_resource type="PackedScene" uid="uid://cuaecgronun2n" path="res://prefabs/dummy_bot/dummy_bot.tscn" id="10_r21l5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jvrg6"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_l47rc"]
+sky_material = SubResource("ProceduralSkyMaterial_jvrg6")
+
+[sub_resource type="Environment" id="Environment_bqab6"]
+background_mode = 2
+sky = SubResource("Sky_l47rc")
+tonemap_mode = 2
+
+[sub_resource type="Resource" id="Resource_kyd4g"]
+script = ExtResource("3_nxeij")
+item_data = ExtResource("4_d1xuu")
+quantity = 1
+metadata/_custom_type_script = "uid://h1s642kf3ghg"
+
+[sub_resource type="Resource" id="Resource_gfsir"]
+script = ExtResource("2_5aq6f")
+slot_datas = Array[ExtResource("3_nxeij")]([null, null, null, SubResource("Resource_kyd4g"), null, null, null, null, null, null])
+metadata/_custom_type_script = "uid://br7shwa55u1ek"
+
+[sub_resource type="Resource" id="Resource_nrvgq"]
+script = ExtResource("5_krsjd")
+slot_datas = Array[ExtResource("3_nxeij")]([null])
+metadata/_custom_type_script = "uid://bk2fww1emg1l0"
+
+[sub_resource type="Resource" id="Resource_sap80"]
+script = ExtResource("6_vbeyi")
+health = 100.0
+health_max = 100.0
+magic = 100.0
+magic_max = 100.0
+attack = 10.0
+defense = 10.0
+magic_attack = 100.0
+magic_defense = 100.0
+Experience = 10.0
+Level = 10.0
+metadata/_custom_type_script = "uid://br5w01sghbbat"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jvrg6"]
+albedo_texture = ExtResource("7_relqu")
+uv1_triplanar = true
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_dk5o0"]
+viewport_path = NodePath("DummyBot/Sprite3D/SubViewport")
+
+[sub_resource type="Curve3D" id="Curve3D_rw2s5"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -2.373, 0, 1.235, 0, 0, 0, 0, 0, 0, -2.403, 0, 7.135, 0, 0, 0, 0, 0, 0, -9.6193, 0, 7.40903, 0, 0, 0, 0, 0, 0, -9.82533, 0, 0.893262, 0, 0, 0, 0, 0, 0, -3.43834, 0, -4.02575),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="PrototypeState" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bqab6")
+
+[node name="Player" parent="." instance=ExtResource("1_y56ci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4.98802)
+inventory_data = SubResource("Resource_gfsir")
+equip_inventory_data = SubResource("Resource_nrvgq")
+stats = SubResource("Resource_sap80")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+size = Vector3(32, 1, 32)
+material = SubResource("StandardMaterial3D_jvrg6")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2, -10.8514)
+size = Vector3(10, 5, 1)
+material = SubResource("StandardMaterial3D_jvrg6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_0qe53")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 243.0
+offset_bottom = 312.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = " State: "
+
+[node name="PlayerState" type="Label" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = " None "
+
+[node name="reticle" type="CenterContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -0.5
+offset_right = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_5oicb")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+offset_left = 773.0
+offset_top = 13.0
+offset_right = 1134.0
+offset_bottom = 338.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(361, 325)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+transform = Transform3D(-0.11934, 0, 0.992853, 0, 1, 0, -0.992853, 0, -0.11934, 15.4807, 0.23859, -3.31459)
+
+[node name="DummyBot" parent="." node_paths=PackedStringArray("target", "path") instance=ExtResource("10_r21l5")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.4528, 0.5, -1.33739)
+target = NodePath("../Player")
+path = NodePath("../Path3D")
+
+[node name="Sprite3D" parent="DummyBot" index="4"]
+texture = SubResource("ViewportTexture_dk5o0")
+
+[node name="StateMachine" parent="DummyBot" index="5" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Follow")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_rw2s5")
+
+[editable path="DummyBot"]

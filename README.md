@@ -136,7 +136,15 @@ The system will support vehicle interactions, including:
 	- [x] chest ui
 - [ ] creature
 	- [x] Dummy Mob Health
-	- [ ] 
+	- [x] Dummy Bot
+		- [x] follow (testing)
+		- [x] lookat (testing)
+		- [x] patrol (testing)
+		- [ ] idle (testing)
+		- [ ] attack
+		- [ ] range attack
+		- [ ] death
+		
 
 ## health and damage:
   There is stats(Health) and HitInfoData type. Simple test build for damage and heal test.
