@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://cuaecgronun2n"]
+[gd_scene load_steps=22 format=3 uid="uid://cuaecgronun2n"]
 
 [ext_resource type="Script" uid="uid://5vx0nowemeyx" path="res://scripts/entity/dummy_bot.gd" id="1_kun2s"]
-[ext_resource type="PackedScene" uid="uid://mvj8sdahle54" path="res://prefabs/health_text3d/health_text3d.tscn" id="2_mm4j6"]
+[ext_resource type="PackedScene" uid="uid://mvj8sdahle54" path="res://prefabs/text3d_state/text3d_state.tscn" id="2_mm4j6"]
+[ext_resource type="Script" uid="uid://br5w01sghbbat" path="res://scripts/entity/stats_data.gd" id="2_q7y7q"]
 [ext_resource type="Script" uid="uid://cnsunhgwcyv14" path="res://scripts/state_machines/bot/bot_idle_state.gd" id="4_i5q8x"]
 [ext_resource type="Script" uid="uid://brjnfuu7keq31" path="res://scripts/state_machines/state_machine.gd" id="4_kfxpy"]
 [ext_resource type="Script" uid="uid://bel136f4folg0" path="res://scripts/state_machines/bot/bot_move_state.gd" id="5_1cwn4"]
@@ -11,6 +12,21 @@
 [ext_resource type="Script" uid="uid://d4j1i4y263y5l" path="res://scripts/state_machines/bot/bot_patrol_state.gd" id="10_8qk05"]
 [ext_resource type="Script" uid="uid://bqcslss10ypjp" path="res://scripts/state_machines/bot/bot_lookat_state.gd" id="10_mm4j6"]
 [ext_resource type="PackedScene" uid="uid://d1jxwr3w0dwo3" path="res://prefabs/dummy_bot/dummy_melee_hand.tscn" id="11_8qk05"]
+[ext_resource type="PackedScene" uid="uid://bv0cj67jtu315" path="res://prefabs/text3d_health/text3d_health.tscn" id="11_mm4j6"]
+
+[sub_resource type="Resource" id="Resource_rnhog"]
+script = ExtResource("2_q7y7q")
+health = 10.0
+health_max = 100.0
+magic = 100.0
+magic_max = 100.0
+attack = 10.0
+defense = 10.0
+magic_attack = 100.0
+magic_defense = 100.0
+Experience = 10.0
+Level = 10.0
+metadata/_custom_type_script = "uid://br5w01sghbbat"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ev4f4"]
 
@@ -27,13 +43,17 @@ albedo_color = Color(0, 0, 0, 1)
 material = SubResource("StandardMaterial3D_tc8cr")
 size = Vector3(0.5, 0.5, 0.5)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_8qk05"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_q7y7q"]
 viewport_path = NodePath("SubViewport_Health")
 
-[node name="DummyBot" type="CharacterBody3D" node_paths=PackedStringArray("hand_right", "state_machine")]
+[sub_resource type="ViewportTexture" id="ViewportTexture_mm4j6"]
+viewport_path = NodePath("SubViewport_Health")
+
+[node name="DummyBot" type="CharacterBody3D" node_paths=PackedStringArray("hand_right", "statemachine")]
 script = ExtResource("1_kun2s")
 hand_right = NodePath("Hand/MeleeHand")
-state_machine = NodePath("StateMachine")
+statemachine = NodePath("StateMachine")
+stats = SubResource("Resource_rnhog")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_ev4f4")
@@ -79,7 +99,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.305437, 0, -0.7217)
 [node name="MeleeHand" parent="Hand" instance=ExtResource("11_8qk05")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.305437, 0.31793, -0.417239)
 
-[node name="Sprite3D_Health" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_mm4j6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25474, 0)
-texture = SubResource("ViewportTexture_8qk05")
+[node name="Sprite3D_Health" parent="." node_paths=PackedStringArray("player") instance=ExtResource("11_mm4j6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.21636, 0)
+texture = SubResource("ViewportTexture_q7y7q")
+player = NodePath("..")
+
+[node name="Sprite3D_State" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_mm4j6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49938, 0)
+texture = SubResource("ViewportTexture_mm4j6")
 player = NodePath("..")

@@ -4,6 +4,8 @@ class_name DummyMob
 signal health_changed(new_health: int, old_health: int)  # Emitted when health changes
 signal died()  # Emitted when health reaches zero
 
+@export var statemachine:Node
+
 var stats:StatsData
 
 const SPEED = 5.0
@@ -37,7 +39,6 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
-
 
 func _on_hit_received(hit_info:HitInfoData):
 	

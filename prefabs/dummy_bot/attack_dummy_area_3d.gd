@@ -6,7 +6,7 @@ var bodies:Array = []
 var is_attacking:bool = false
 @export var hit_info:HitInfoData
 @export var attack_enabled: bool = true  # Toggle to enable/disable attacks
-var player
+#var player
 #func _ready() -> void:
 	#print("timer.is_stopped():", timer)
 	#pass
@@ -24,23 +24,28 @@ func _process(delta: float) -> void:
 	if attack_enabled == true and len(bodies) > 0 and timer.is_stopped() == true:
 		print("Starting attack timer")
 		timer.start()
+	# in case of out range stop attack # melee # need range check 
 	elif (bodies.size() == 0 or attack_enabled == false) and not timer.is_stopped():
+		print("Stopping attack timer")
+		timer.stop()
+	# in case of death set attack_enabled false
+	elif attack_enabled == false and not timer.is_stopped():
 		print("Stopping attack timer")
 		timer.stop()
 
 func _on_body_entered(body: Node3D) -> void:
 	#print("_on_body_entered:", body)
-	player = body
+	#player = body
 	#if body:
-	bodies.append(player)
+	bodies.append(body)
 	#pass
 
 func _on_body_exited(body: Node3D) -> void:
 	#print("_on_body_exited:", body)
-	if body:
-		var index = bodies.find(body)
-		if index != -1:
-			bodies.remove_at(index)
+	#if body:
+	var index = bodies.find(body)
+	if index != -1:
+		bodies.remove_at(index)
 	#pass
 
 func _on_timer_timeout() -> void:
@@ -59,7 +64,8 @@ func perform_attack() -> void:
 # Public function to toggle attack state
 func set_attack_enabled(enabled: bool) -> void:
 	attack_enabled = enabled
-	if not attack_enabled:
+	if attack_enabled == false:
+		print("STOP")
 		timer.stop()  # Stop timer if attack is disabled
 		#entities.clear()  # Optional: Clear bodies to reset state
 		#print("Attack system ", "enabled" if enabled else "disabled")

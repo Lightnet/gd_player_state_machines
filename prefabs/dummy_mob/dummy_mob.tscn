@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dtbjwjmyvmuq6" path="res://prefabs/dummy_mob/dummy_mob.gd" id="1_7nqf1"]
 [ext_resource type="Script" uid="uid://d4f7n2fpvxghr" path="res://scripts/player/stats_display_health.gd" id="2_k13mg"]
-[ext_resource type="Script" uid="uid://buheo0yw6ymk2" path="res://prefabs/dummy_mob/sprite_3d_camera_face.gd" id="2_tc8cr"]
+[ext_resource type="Script" uid="uid://buheo0yw6ymk2" path="res://prefabs/text3d_state/sprite_3d_state.gd" id="2_tc8cr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ev4f4"]
 

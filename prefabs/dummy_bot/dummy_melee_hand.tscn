@@ -23,6 +23,7 @@ hit_info = SubResource("Resource_rnhog")
 shape = SubResource("BoxShape3D_8qk05")
 
 [node name="Timer" type="Timer" parent="."]
+editor_description = "Attack time"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

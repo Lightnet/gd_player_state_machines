@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://mvj8sdahle54"]
+
+[ext_resource type="Script" uid="uid://buheo0yw6ymk2" path="res://prefabs/text3d_state/sprite_3d_state.gd" id="1_tofd1"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_y4lni"]
+viewport_path = NodePath("SubViewport_Health")
+
+[node name="Sprite3D_State" type="Sprite3D" node_paths=PackedStringArray("label_state")]
+texture = SubResource("ViewportTexture_y4lni")
+script = ExtResource("1_tofd1")
+label_state = NodePath("SubViewport_Health/CenterContainer/HBoxContainer/Label_State")
+
+[node name="SubViewport_Health" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 30)
+
+[node name="CenterContainer" type="CenterContainer" parent="SubViewport_Health"]
+offset_right = 256.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport_Health/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SubViewport_Health/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "State:"
+
+[node name="Label_State" type="Label" parent="SubViewport_Health/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"

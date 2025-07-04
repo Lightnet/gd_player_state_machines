@@ -6,6 +6,7 @@ const WALKING = "Walking"
 const JUMPING = "Jumping"
 const FOLLOW = "Follow"
 const ATTACK = "Attack"
+const DEATH = "Death"
 
 var bot: DummyBot
 

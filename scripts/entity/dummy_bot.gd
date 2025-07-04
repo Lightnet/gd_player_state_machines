@@ -17,12 +17,12 @@ var is_target_position:bool = false
 
 
 
-@export var state_machine:StateMachine
+@export var statemachine:StateMachine
 
 signal health_changed(new_health: int, old_health: int)  # Emitted when health changes
 signal died()  # Emitted when health reaches zero
 
-var stats:StatsData
+@export var stats:StatsData
 
 @export var path:Node3D
 
@@ -33,7 +33,7 @@ var is_controller:bool = false;
 func _ready() -> void:
 	if not stats:
 		stats = StatsData.new()
-	var state = state_machine.state
+	var state = statemachine.state
 	state.finished.emit(state.FOLLOW)
 
 func _physics_process(delta: float) -> void:
@@ -74,10 +74,19 @@ func _on_hit_received(hit_info:HitInfoData):
 		if stats.health < 0:
 			stats.health = 0
 			#emit_signal("died")
+			stop_attack()
+			statemachine.state.finished.emit(statemachine.state.DEATH)
 		var current_health_points: float = stats.health
 		#emit_signal("health_changed", current_health_points, old_health)
 	pass
 
-
+func stop_attack():
+	#stop weapon attack
+	# in case of death
+	if hand_right:
+		if hand_right.has_method("set_attack_enabled"):
+			#print("attack " )
+			hand_right.set_attack_enabled(false)
+	pass
 
 #
