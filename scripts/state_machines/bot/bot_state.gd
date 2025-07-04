@@ -4,6 +4,8 @@ const IDLE = "Idle" # node name
 const RUNNING = "Running"
 const WALKING = "Walking" 
 const JUMPING = "Jumping"
+const FOLLOW = "Follow"
+const ATTACK = "Attack"
 
 var bot: DummyBot
 

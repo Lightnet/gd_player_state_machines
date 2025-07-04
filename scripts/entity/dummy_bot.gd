@@ -5,7 +5,16 @@ class_name DummyBot
 var target_position:Vector3
 var is_target_position:bool = false
 
-var thinking_mode:String = ""
+@export var hand_right:Node3D
+
+# agro, aggravation, aggression
+# ranger
+#var behaviour_mode:String = "" # current set
+#var current_behaviour:String = "" # current mood
+#var combat_type:String = "physical" # weapon
+#var fallback_combat_type:String = "physical" # no weapon
+# passive, hostile, neutral
+
 
 
 @export var state_machine:StateMachine
@@ -24,6 +33,8 @@ var is_controller:bool = false;
 func _ready() -> void:
 	if not stats:
 		stats = StatsData.new()
+	var state = state_machine.state
+	state.finished.emit(state.FOLLOW)
 
 func _physics_process(delta: float) -> void:
 	if not is_controller:

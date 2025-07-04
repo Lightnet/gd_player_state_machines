@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://mvj8sdahle54"]
+
+[ext_resource type="Script" uid="uid://buheo0yw6ymk2" path="res://prefabs/dummy_mob/sprite_3d_camera_face.gd" id="1_eowsp"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_y4lni"]
+viewport_path = NodePath("SubViewport_Health")
+
+[node name="Sprite3D_Health" type="Sprite3D" node_paths=PackedStringArray("label_health", "label_health_max")]
+texture = SubResource("ViewportTexture_y4lni")
+script = ExtResource("1_eowsp")
+label_health = NodePath("SubViewport_Health/CenterContainer/HBoxContainer/Label_Health")
+label_health_max = NodePath("SubViewport_Health/CenterContainer/HBoxContainer/Label_Health_Max")
+
+[node name="SubViewport_Health" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 30)
+
+[node name="CenterContainer" type="CenterContainer" parent="SubViewport_Health"]
+offset_right = 256.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport_Health/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SubViewport_Health/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "Health:"
+
+[node name="Label_Health" type="Label" parent="SubViewport_Health/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="Label3" type="Label" parent="SubViewport_Health/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "/"
+
+[node name="Label_Health_Max" type="Label" parent="SubViewport_Health/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"

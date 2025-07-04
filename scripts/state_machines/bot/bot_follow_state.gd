@@ -31,11 +31,20 @@ func physics_update(delta: float) -> void:
 		
 		#print("distance_to_point: ",distance_to_point,"point_threshold: ", point_threshold)
 		# Check if close enough to the current point
+		# if close target
 		if distance_to_point <= point_threshold:
+			#print("bot.hand_right: " , bot.hand_right)
+			if bot.hand_right:
+				if bot.hand_right.has_method("set_attack_enabled"):
+					#print("attack " )
+					bot.hand_right.set_attack_enabled(true)
 			pass
 		elif distance_to_point >= out_range:
 			pass
 		else:
+			if bot.hand_right:
+				if bot.hand_right.has_method("set_attack_enabled"):
+					bot.hand_right.set_attack_enabled(false)
 			# Move the bot
 			bot.velocity = direction * move_speed
 			bot.velocity.y = 0  # Keep bot on the ground (remove if gravity is needed)

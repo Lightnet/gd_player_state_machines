@@ -1,8 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://cuaecgronun2n"]
+[gd_scene load_steps=18 format=3 uid="uid://cuaecgronun2n"]
 
 [ext_resource type="Script" uid="uid://5vx0nowemeyx" path="res://scripts/entity/dummy_bot.gd" id="1_kun2s"]
-[ext_resource type="Script" uid="uid://buheo0yw6ymk2" path="res://prefabs/dummy_mob/sprite_3d_camera_face.gd" id="2_67f07"]
-[ext_resource type="Script" uid="uid://d4f7n2fpvxghr" path="res://scripts/player/stats_display_health.gd" id="3_ybkw8"]
+[ext_resource type="PackedScene" uid="uid://mvj8sdahle54" path="res://prefabs/health_text3d/health_text3d.tscn" id="2_mm4j6"]
 [ext_resource type="Script" uid="uid://cnsunhgwcyv14" path="res://scripts/state_machines/bot/bot_idle_state.gd" id="4_i5q8x"]
 [ext_resource type="Script" uid="uid://brjnfuu7keq31" path="res://scripts/state_machines/state_machine.gd" id="4_kfxpy"]
 [ext_resource type="Script" uid="uid://bel136f4folg0" path="res://scripts/state_machines/bot/bot_move_state.gd" id="5_1cwn4"]
@@ -11,7 +10,7 @@
 [ext_resource type="Script" uid="uid://bh24qw3m2prc8" path="res://scripts/state_machines/bot/bot_follow_state.gd" id="9_o0r6u"]
 [ext_resource type="Script" uid="uid://d4j1i4y263y5l" path="res://scripts/state_machines/bot/bot_patrol_state.gd" id="10_8qk05"]
 [ext_resource type="Script" uid="uid://bqcslss10ypjp" path="res://scripts/state_machines/bot/bot_lookat_state.gd" id="10_mm4j6"]
-[ext_resource type="Script" uid="uid://d3ucbnr2v1o71" path="res://prefabs/dummy_bot/attack_dummy_area_3d.gd" id="12_mm4j6"]
+[ext_resource type="PackedScene" uid="uid://d1jxwr3w0dwo3" path="res://prefabs/dummy_bot/dummy_melee_hand.tscn" id="11_8qk05"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ev4f4"]
 
@@ -28,68 +27,30 @@ albedo_color = Color(0, 0, 0, 1)
 material = SubResource("StandardMaterial3D_tc8cr")
 size = Vector3(0.5, 0.5, 0.5)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_k13mg"]
-viewport_path = NodePath("Sprite3D/SubViewport")
+[sub_resource type="ViewportTexture" id="ViewportTexture_8qk05"]
+viewport_path = NodePath("SubViewport_Health")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_8qk05"]
-
-[node name="DummyBot" type="CharacterBody3D" node_paths=PackedStringArray("state_machine")]
+[node name="DummyBot" type="CharacterBody3D" node_paths=PackedStringArray("hand_right", "state_machine")]
 script = ExtResource("1_kun2s")
+hand_right = NodePath("Hand/MeleeHand")
 state_machine = NodePath("StateMachine")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_ev4f4")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="capsule" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_k13mg")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="face_direction" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.317424, -0.411615)
 mesh = SubResource("BoxMesh_mns0v")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27574, 0)
-texture = SubResource("ViewportTexture_k13mg")
-script = ExtResource("2_67f07")
-
-[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(256, 30)
-
-[node name="CenterContainer" type="CenterContainer" parent="Sprite3D/SubViewport"]
-offset_right = 256.0
-offset_bottom = 40.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Sprite3D/SubViewport/CenterContainer" node_paths=PackedStringArray("player", "label_health", "label_health_max")]
-layout_mode = 2
-script = ExtResource("3_ybkw8")
-player = NodePath("../../../..")
-label_health = NodePath("Label_Health")
-label_health_max = NodePath("Label_Health_Max")
-
-[node name="Label" type="Label" parent="Sprite3D/SubViewport/CenterContainer/HBoxContainer"]
-layout_mode = 2
-text = "Health:"
-
-[node name="Label_Health" type="Label" parent="Sprite3D/SubViewport/CenterContainer/HBoxContainer"]
-layout_mode = 2
-text = "0"
-
-[node name="Label3" type="Label" parent="Sprite3D/SubViewport/CenterContainer/HBoxContainer"]
-layout_mode = 2
-text = "/"
-
-[node name="Label_Health_Max" type="Label" parent="Sprite3D/SubViewport/CenterContainer/HBoxContainer"]
-layout_mode = 2
-text = "0"
-
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_kfxpy")
-initial_state = NodePath("Patrol")
+initial_state = NodePath("Follow")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("4_i5q8x")
@@ -115,17 +76,10 @@ script = ExtResource("10_8qk05")
 [node name="Hand" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.305437, 0, -0.7217)
 
-[node name="Area3D" type="Area3D" parent="Hand"]
+[node name="MeleeHand" parent="Hand" instance=ExtResource("11_8qk05")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.305437, 0.31793, -0.417239)
-collision_layer = 2
-collision_mask = 2
-script = ExtResource("12_mm4j6")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hand/Area3D"]
-shape = SubResource("BoxShape3D_8qk05")
-
-[node name="Timer" type="Timer" parent="Hand/Area3D"]
-
-[connection signal="body_entered" from="Hand/Area3D" to="Hand/Area3D" method="_on_body_entered"]
-[connection signal="body_exited" from="Hand/Area3D" to="Hand/Area3D" method="_on_body_exited"]
-[connection signal="timeout" from="Hand/Area3D/Timer" to="Hand/Area3D" method="_on_timer_timeout"]
+[node name="Sprite3D_Health" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_mm4j6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25474, 0)
+texture = SubResource("ViewportTexture_8qk05")
+player = NodePath("..")
