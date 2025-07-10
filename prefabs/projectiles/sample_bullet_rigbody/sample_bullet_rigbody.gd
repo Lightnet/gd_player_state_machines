@@ -2,7 +2,7 @@ extends RigidBody3D
 
 @export var hit_info:HitInfoData
 @export var speed = 100
-@onready var ray: RayCast3D = $RayCast3D
+#@onready var ray: RayCast3D = $RayCast3D
 
 var bStarted:bool = false
 

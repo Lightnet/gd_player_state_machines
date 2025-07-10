@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://drhr4o3wugap5"]
+[gd_scene load_steps=22 format=3 uid="uid://drhr4o3wugap5"]
 
 [ext_resource type="PackedScene" uid="uid://mvfpjdjmgvyl" path="res://prefabs/player/player.tscn" id="1_oxe8p"]
 [ext_resource type="Script" uid="uid://br7shwa55u1ek" path="res://inventory/inventory_data.gd" id="2_c6kxr"]
@@ -57,8 +57,11 @@ metadata/_custom_type_script = "uid://br5w01sghbbat"
 albedo_texture = ExtResource("7_iactk")
 uv1_triplanar = true
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_dk5o0"]
-viewport_path = NodePath("Sprite3D/SubViewport")
+[sub_resource type="ViewportTexture" id="ViewportTexture_q7y7q"]
+viewport_path = NodePath("SubViewport_Health")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_mm4j6"]
+viewport_path = NodePath("SubViewport_Health")
 
 [sub_resource type="Curve3D" id="Curve3D_rw2s5"]
 _data = {
@@ -157,11 +160,14 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.452
 target = NodePath("../Player")
 path = NodePath("../Path3D")
 
-[node name="Sprite3D" parent="DummyBot" index="4"]
-texture = SubResource("ViewportTexture_dk5o0")
-
-[node name="StateMachine" parent="DummyBot" index="5" node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" parent="DummyBot" index="4" node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Lookat")
+
+[node name="Sprite3D_Health" parent="DummyBot" index="6"]
+texture = SubResource("ViewportTexture_q7y7q")
+
+[node name="Sprite3D_State" parent="DummyBot" index="7"]
+texture = SubResource("ViewportTexture_mm4j6")
 
 [node name="Path3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_rw2s5")

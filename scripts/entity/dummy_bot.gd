@@ -9,13 +9,11 @@ var is_target_position:bool = false
 
 # agro, aggravation, aggression
 # ranger
-#var behaviour_mode:String = "" # current set
-#var current_behaviour:String = "" # current mood
+var behaviour_mode:String = "argo" # current set
+var current_behaviour:String = "" # current mood
 #var combat_type:String = "physical" # weapon
 #var fallback_combat_type:String = "physical" # no weapon
 # passive, hostile, neutral
-
-
 
 @export var statemachine:StateMachine
 

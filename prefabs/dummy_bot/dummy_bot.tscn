@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cuaecgronun2n"]
+[gd_scene load_steps=25 format=3 uid="uid://cuaecgronun2n"]
 
 [ext_resource type="Script" uid="uid://5vx0nowemeyx" path="res://scripts/entity/dummy_bot.gd" id="1_kun2s"]
 [ext_resource type="PackedScene" uid="uid://mvj8sdahle54" path="res://prefabs/text3d_state/text3d_state.tscn" id="2_mm4j6"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" uid="uid://bqcslss10ypjp" path="res://scripts/state_machines/bot/bot_lookat_state.gd" id="10_mm4j6"]
 [ext_resource type="PackedScene" uid="uid://d1jxwr3w0dwo3" path="res://prefabs/dummy_bot/dummy_melee_hand.tscn" id="11_8qk05"]
 [ext_resource type="PackedScene" uid="uid://bv0cj67jtu315" path="res://prefabs/text3d_health/text3d_health.tscn" id="11_mm4j6"]
+[ext_resource type="Script" uid="uid://co0u5lsnbwbxt" path="res://scripts/state_machines/bot/bot_detect_state.gd" id="11_rnhog"]
+[ext_resource type="Script" uid="uid://c40t2u4v8wx3x" path="res://prefabs/dummy_bot/detect_entities.gd" id="15_63rhx"]
 
 [sub_resource type="Resource" id="Resource_rnhog"]
 script = ExtResource("2_q7y7q")
@@ -49,6 +51,9 @@ viewport_path = NodePath("SubViewport_Health")
 [sub_resource type="ViewportTexture" id="ViewportTexture_mm4j6"]
 viewport_path = NodePath("SubViewport_Health")
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_uxpjf"]
+radius = 5.0
+
 [node name="DummyBot" type="CharacterBody3D" node_paths=PackedStringArray("hand_right", "statemachine")]
 script = ExtResource("1_kun2s")
 hand_right = NodePath("Hand/MeleeHand")
@@ -70,7 +75,7 @@ mesh = SubResource("BoxMesh_mns0v")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_kfxpy")
-initial_state = NodePath("Follow")
+initial_state = NodePath("Detect")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("4_i5q8x")
@@ -93,6 +98,9 @@ script = ExtResource("10_mm4j6")
 [node name="Patrol" type="Node" parent="StateMachine"]
 script = ExtResource("10_8qk05")
 
+[node name="Detect" type="Node" parent="StateMachine"]
+script = ExtResource("11_rnhog")
+
 [node name="Hand" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.305437, 0, -0.7217)
 
@@ -108,3 +116,12 @@ player = NodePath("..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49938, 0)
 texture = SubResource("ViewportTexture_mm4j6")
 player = NodePath("..")
+
+[node name="Detect_Entities" type="Area3D" parent="."]
+script = ExtResource("15_63rhx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Detect_Entities"]
+shape = SubResource("CylinderShape3D_uxpjf")
+
+[connection signal="body_entered" from="Detect_Entities" to="Detect_Entities" method="_on_body_entered"]
+[connection signal="body_exited" from="Detect_Entities" to="Detect_Entities" method="_on_body_exited"]

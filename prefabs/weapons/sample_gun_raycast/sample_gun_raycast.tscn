@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8u80ixt6j080"]
+
+[ext_resource type="Script" uid="uid://bayvnoliu0jsn" path="res://prefabs/weapons/sample_gun/sample_gun.gd" id="1_7vgr2"]
+[ext_resource type="PackedScene" uid="uid://ccmraws5hy602" path="res://prefabs/projectiles/sample_bullet_raycast/sample_bullet_raycast.tscn" id="2_7vgr2"]
+[ext_resource type="PackedScene" uid="uid://dxyuhko25thbe" path="res://prefabs/vfx/muzzle_flash/muzzle_flash.tscn" id="3_vudvi"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ynflq"]
+size = Vector3(0.02, 0.1, 0.02)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7vgr2"]
+albedo_color = Color(0.27, 0.318667, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_372vm"]
+size = Vector3(0.02, 0.04, 0.185)
+
+[node name="sample_gun_raycast" type="Node3D" node_paths=PackedStringArray("fire_point", "muzzle")]
+script = ExtResource("1_7vgr2")
+PROJECTILE = ExtResource("2_7vgr2")
+fire_point = NodePath("FirePoint")
+muzzle = NodePath("FirePoint/MuzzleFlash")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ynflq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.072715, -0.0585027)
+material_override = SubResource("StandardMaterial3D_7vgr2")
+mesh = SubResource("BoxMesh_372vm")
+skeleton = NodePath("../..")
+
+[node name="FirePoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0706269, -0.17171)
+
+[node name="MuzzleFlash" parent="FirePoint" instance=ExtResource("3_vudvi")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -0.0155953)

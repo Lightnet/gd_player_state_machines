@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://ur2qmll72f4o"]
 
-[ext_resource type="Texture2D" uid="uid://b7xhkg0jeq17p" path="res://addons/kenney_prototype_textures/dark/texture_12.png" id="2_fnkv6"]
-[ext_resource type="PackedScene" uid="uid://d26uwi8kabgcl" path="res://prefabs/player/prototype_player.tscn" id="5_wt74c"]
-[ext_resource type="Texture2D" uid="uid://dihkml6628xmu" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="6_vkwf4"]
-[ext_resource type="Script" uid="uid://b4dxjfku8hkmx" path="res://scripts/ui/reticle.gd" id="9_r1pmr"]
+[ext_resource type="Texture2D" uid="uid://dihkml6628xmu" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_nvx0a"]
+[ext_resource type="Texture2D" uid="uid://b7xhkg0jeq17p" path="res://addons/kenney_prototype_textures/dark/texture_12.png" id="2_2f6lc"]
+[ext_resource type="Script" uid="uid://b4dxjfku8hkmx" path="res://scripts/ui/reticle.gd" id="3_1dmlf"]
+[ext_resource type="PackedScene" uid="uid://d26uwi8kabgcl" path="res://prefabs/player/prototype_player.tscn" id="4_ojmne"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jvrg6"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -18,11 +18,11 @@ sky = SubResource("Sky_l47rc")
 tonemap_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jvrg6"]
-albedo_texture = ExtResource("6_vkwf4")
+albedo_texture = ExtResource("1_nvx0a")
 uv1_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wt74c"]
-albedo_texture = ExtResource("2_fnkv6")
+albedo_texture = ExtResource("2_2f6lc")
 uv1_triplanar = true
 
 [node name="PrototypeState" type="Node3D"]
@@ -76,7 +76,7 @@ offset_right = 0.5
 offset_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("9_r1pmr")
+script = ExtResource("3_1dmlf")
 
-[node name="Player" parent="." instance=ExtResource("5_wt74c")]
+[node name="Player" parent="." instance=ExtResource("4_ojmne")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9184, 0.5, 1.83502)

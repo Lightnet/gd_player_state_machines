@@ -34,17 +34,21 @@ func physics_update(delta: float) -> void:
 		# if close target
 		if distance_to_point <= point_threshold:
 			#print("bot.hand_right: " , bot.hand_right)
-			if bot.hand_right:
-				if bot.hand_right.has_method("set_attack_enabled"):
-					#print("attack " )
-					bot.hand_right.set_attack_enabled(true)
-			pass
+			#if bot.hand_right:
+				#if bot.hand_right.has_method("set_attack_enabled"):
+					##print("attack " )
+					#bot.hand_right.set_attack_enabled(true)
+			#if bot.behaviour_mode == "argo":
+				#finished.emit(ATTACK)
+			#pass
+			finished.emit(ATTACK)
 		elif distance_to_point >= out_range:
+			finished.emit(DETECT)
 			pass
 		else:
-			if bot.hand_right:
-				if bot.hand_right.has_method("set_attack_enabled"):
-					bot.hand_right.set_attack_enabled(false)
+			#if bot.hand_right:
+				#if bot.hand_right.has_method("set_attack_enabled"):
+					#bot.hand_right.set_attack_enabled(false)
 			# Move the bot
 			bot.velocity = direction * move_speed
 			bot.velocity.y = 0  # Keep bot on the ground (remove if gravity is needed)
